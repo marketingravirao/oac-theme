@@ -1,0 +1,16 @@
+/*
+Theme Name: Online Astrology Classes
+Version: 1.0
+*/
+
+body {
+	max-width: 52rem;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+	color: #242820;
+	background: #fbfaf6;
+	font: 1rem/1.6 system-ui, sans-serif;
+}
+
+a { color: #385a47; }
+h1, h2 { font-family: Georgia, serif; }
