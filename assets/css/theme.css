@@ -55,6 +55,24 @@ p { color: var(--color-muted); }
 .text-link { display: inline-flex; gap: 10px; align-items: center; color: var(--color-accent); font-size: 14px; font-weight: 700; text-decoration: none; }
 .text-link span { transition: transform .2s ease; }
 .text-link:hover span { transform: translateX(4px); }
+.eyebrow { margin: 0 0 14px; color: var(--color-primary); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+.eyebrow--coral { color: var(--color-accent); }
+.section-heading { max-width: 720px; margin-bottom: 42px; }
+.section-heading--center { margin-inline: auto; text-align: center; }
+.section-heading p:last-child { margin-bottom: 0; }
+
+.faq { background: var(--color-primary-soft); }
+.faq__grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 70px; }
+.faq__heading { max-width: 360px; }
+.faq__heading h2 { font-size: 40px; }
+.faq__heading > p:not(.eyebrow) { margin-bottom: 23px; }
+.faq__list { border-top: 1px solid var(--color-line); }
+.faq-item { border-bottom: 1px solid var(--color-line); }
+.faq-item summary { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: 20px; color: var(--color-ink); font-family: var(--font-heading); font-size: 18px; cursor: pointer; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary span { color: var(--color-accent); font-family: Arial, sans-serif; font-size: 23px; transition: transform .2s ease; }
+.faq-item[open] summary span { transform: rotate(45deg); }
+.faq-item > p { max-width: 620px; margin: -2px 35px 20px 0; font-size: 14px; }
 
 .contact-bar { color: #fff; background: var(--color-primary-deep); font-size: 12px; }
 .contact-bar__inner { display: flex; min-height: 36px; align-items: center; gap: 24px; }
@@ -84,6 +102,7 @@ p { color: var(--color-muted); }
 	.main-nav__list { gap: 14px; }
 	.main-nav__list a { font-size: 12px; }
 	.footer__grid { gap: 36px; }
+	.faq__grid { gap: 40px; }
 }
 
 @media (max-width: 680px) {
@@ -100,6 +119,11 @@ p { color: var(--color-muted); }
 	.main-nav__list .nav-login-item a { padding: 5px 10px; }
 	.footer__grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
 	.footer__brand { grid-column: 1 / -1; }
+	.faq__grid { gap: 35px; }
+	.faq__grid { grid-template-columns: 1fr; }
+	.faq__heading { max-width: none; }
+	.faq__heading h2 { font-size: 35px; }
+	.faq-item summary { min-height: 58px; font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

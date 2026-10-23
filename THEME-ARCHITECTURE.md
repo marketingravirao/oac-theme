@@ -5,6 +5,7 @@
 - `functions.php` loads setup, asset, helper, and homepage data functions from `inc/`.
 - `header.php` and `footer.php` provide the shared shell; WordPress menus can be assigned to **Primary Navigation**.
 - `front-page.php` composes the homepage from `template-parts/sections/home/`.
+- `templates/template-about.php` is the selectable **About Us** page template; its sections are in `template-parts/sections/about/` and its CSS loads only when that template is selected.
 - `template-parts/components/` contains reusable button, section heading, topic, book, and FAQ markup.
 - `assets/css/theme.css` holds design tokens and shared styles. `assets/css/pages/home.css` is enqueued only on the front page.
 - `assets/js/animations.js` is front-page-only. Local GSAP 3.15.0, ScrollTrigger, and SplitText files are in `assets/vendor/gsap/`; their standard license terms are linked in that directory's README.
@@ -12,7 +13,7 @@
 
 ## Add a Page
 
-Create a PHP template with a WordPress template header when a page needs a distinct layout. Call `get_header()` and `get_footer()`, then compose existing sections with `get_template_part()`. Add a dedicated stylesheet only when the page has styles not shared by existing components, and enqueue it conditionally in `inc/assets.php` with `is_page_template()`.
+Create a PHP template with a WordPress template header when a page needs a distinct layout. Call `get_header()` and `get_footer()`, then compose existing sections with `get_template_part()`. Assign **About Us** in the page editor's Template setting for the About page. Add a dedicated stylesheet only when the page has styles not shared by existing components, and enqueue it conditionally in `inc/assets.php` with `is_page_template()`.
 
 ## Add a Component or Section
 

@@ -38,3 +38,37 @@ function oac_home_faqs() {
 		__( 'Will I receive support during the course?', 'oac-theme' ) => __( 'Yes. Students can get ongoing mentor support through the private learning community.', 'oac-theme' ),
 	);
 }
+
+function oac_about_timeline() {
+	return array(
+		array(
+			'era'     => __( '1990s', 'oac-theme' ),
+			'content' => __( 'Dr. Ravi Rao begins his journey as an astrology educator, mentoring students and laying the foundation for a structured approach to predictive astrology and scientific understanding.', 'oac-theme' ),
+		),
+		array(
+			'era'     => __( '2000s', 'oac-theme' ),
+			'content' => __( 'He launches online courses under the International Astrological Society and conducts full-day workshops for global participants, often in batches of 50–100 learners, with certification on completion.', 'oac-theme' ),
+		),
+		array(
+			'era'     => __( '2010s', 'oac-theme' ),
+			'content' => __( 'Dr. Rao expands his teaching to include scientific aspects of astrology, its links to astronomy, and structured training that integrates traditional and practical applications.', 'oac-theme' ),
+		),
+		array(
+			'era'     => __( '2020s', 'oac-theme' ),
+			'content' => __( 'Through Online Astrology Classes, he offers weekly sessions on predictive astrology, scientific foundations, and practical applications. Basic and advanced programs are delivered as six-month courses for serious learners worldwide.', 'oac-theme' ),
+		),
+	);
+}
+
+function oac_about_faqs() {
+	return array(
+		__( 'What is Online Astrology Classes?', 'oac-theme' ) => __( 'Online Astrology Classes (OAC) is a dedicated learning platform for Vedic Astrology and allied sciences, offering live online sessions, structured modules, and guided practice for serious learners.', 'oac-theme' ),
+		__( 'What courses do you offer?', 'oac-theme' ) => __( 'We offer Basic and Advanced Astrology courses and specialized programs such as Panchanga and Muhurtha, Horary Astrology, Medical Astrology, Tajika System, Marriage Matching, and Numerology.', 'oac-theme' ),
+		__( 'Can I take online courses?', 'oac-theme' ) => __( 'Yes. All programs are delivered online through our learning portal, and recordings are available afterward.', 'oac-theme' ),
+		__( 'Do I need prior knowledge to take your courses?', 'oac-theme' ) => __( 'No prior background is required for our Basic Astrology course. Advanced and specialized courses are ideal once you are comfortable with fundamental concepts.', 'oac-theme' ),
+		__( 'Will I receive a certificate after completing a course?', 'oac-theme' ) => __( 'Yes. Students receive a digital certificate after successfully completing the course and required assessments.', 'oac-theme' ),
+		__( 'Can I pay for courses online?', 'oac-theme' ) => __( 'Yes. You can pay securely through the online payment gateway using cards, net banking, UPI, or wallets, depending on your location.', 'oac-theme' ),
+		__( 'Do I need special software or tools to take your courses?', 'oac-theme' ) => __( 'You need a stable internet connection, a computer or mobile device, and a web browser. Instructors will recommend any optional astrology software or tools.', 'oac-theme' ),
+		__( 'Will I receive support and assistance during the course?', 'oac-theme' ) => __( 'Yes. Students receive ongoing mentor support, doubt-clearing opportunities, live Q&A, discussion groups, and email or portal support.', 'oac-theme' ),
+	);
+}

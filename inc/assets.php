@@ -7,12 +7,19 @@ function oac_enqueue_assets() {
 	$theme_css = '/assets/css/theme.css';
 	wp_enqueue_style( 'oac-theme', get_theme_file_uri( $theme_css ), array(), oac_asset_version( $theme_css ) );
 
-	if ( ! is_front_page() ) {
+	$is_home = is_front_page();
+	$is_about = is_page_template( 'templates/template-about.php' );
+	if ( $is_home ) {
+		$home_css = '/assets/css/pages/home.css';
+		wp_enqueue_style( 'oac-home', get_theme_file_uri( $home_css ), array( 'oac-theme' ), oac_asset_version( $home_css ) );
+	}
+	if ( $is_about ) {
+		$about_css = '/assets/css/pages/about.css';
+		wp_enqueue_style( 'oac-about', get_theme_file_uri( $about_css ), array( 'oac-theme' ), oac_asset_version( $about_css ) );
+	}
+	if ( ! $is_home && ! $is_about ) {
 		return;
 	}
-
-	$home_css = '/assets/css/pages/home.css';
-	wp_enqueue_style( 'oac-home', get_theme_file_uri( $home_css ), array( 'oac-theme' ), oac_asset_version( $home_css ) );
 
 	$gsap_core = '/assets/vendor/gsap/gsap.min.js';
 	$scroll_trigger = '/assets/vendor/gsap/ScrollTrigger.min.js';
