@@ -8,6 +8,7 @@
 - `templates/template-about.php` is the selectable **About Us** page template; its sections are in `template-parts/sections/about/` and its CSS loads only when that template is selected.
 - `template-parts/components/` contains reusable button, section heading, topic, book, and FAQ markup.
 - `assets/css/theme.css` holds design tokens and shared styles. `assets/css/pages/home.css` is enqueued only on the front page.
+- Shared `.section` spacing is controlled by `--section-space` in `theme.css` (88px desktop, 62px mobile); page stylesheets should compose this utility rather than redefining section padding.
 - `assets/js/animations.js` is front-page-only. Local GSAP 3.15.0, ScrollTrigger, and SplitText files are in `assets/vendor/gsap/`; their standard license terms are linked in that directory's README.
 - `page.php`, `single.php`, `archive.php`, `404.php`, and `index.php` follow the WordPress template hierarchy.
 

@@ -18,10 +18,10 @@
 		</div>
 	</div>
 </div>
-<header class="site-header">
+<header class="site-header" data-scroll-header>
 	<div class="site-width site-header__inner">
 		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Online Astrology Classes home', 'oac-theme' ); ?>">
-			<img src="<?php echo esc_url( oac_upload_url( '2025/03/cropped-cropped-Astro-Class-Logo-png.png' ) ); ?>" alt="Online Astrology Classes" width="190" height="58">
+			<img src="<?php echo esc_url( oac_upload_url( '2025/03/cropped-Astro-Class-Logo-png.png' ) ); ?>" alt="Online Astrology Classes" width="190" height="46">
 		</a>
 		<nav class="main-nav" aria-label="<?php esc_attr_e( 'Main navigation', 'oac-theme' ); ?>">
 			<?php
@@ -30,7 +30,7 @@
 					'theme_location' => 'primary',
 					'container'      => false,
 					'menu_class'     => 'main-nav__list',
-					'fallback_cb'    => 'oac_primary_menu_fallback',
+					'fallback_cb'    => false,
 					'depth'          => 1,
 				)
 			);

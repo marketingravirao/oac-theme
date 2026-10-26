@@ -1,7 +1,7 @@
 <footer class="site-footer" id="contact">
 	<div class="site-width footer__grid">
 		<div class="footer__brand">
-			<img src="<?php echo esc_url( oac_upload_url( '2025/03/cropped-cropped-Astro-Class-Logo-png.png' ) ); ?>" alt="Online Astrology Classes" width="180" height="70" loading="lazy">
+			<img src="<?php echo esc_url( oac_upload_url( '2025/03/cropped-Astro-Class-Logo-png.png' ) ); ?>" alt="Online Astrology Classes" width="180" height="43" loading="lazy">
 			<p><?php esc_html_e( 'Flexible astrology learning for personal and career growth.', 'oac-theme' ); ?></p>
 		</div>
 		<div>

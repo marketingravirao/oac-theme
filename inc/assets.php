@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 function oac_enqueue_assets() {
 	$theme_css = '/assets/css/theme.css';
 	wp_enqueue_style( 'oac-theme', get_theme_file_uri( $theme_css ), array(), oac_asset_version( $theme_css ) );
+	$header_script = '/assets/js/header-scroll.js';
+	wp_enqueue_script( 'oac-header-scroll', get_theme_file_uri( $header_script ), array(), oac_asset_version( $header_script ), true );
+	wp_script_add_data( 'oac-header-scroll', 'strategy', 'defer' );
 
 	$is_home = is_front_page();
 	$is_about = is_page_template( 'templates/template-about.php' );
@@ -16,6 +19,11 @@ function oac_enqueue_assets() {
 	if ( $is_about ) {
 		$about_css = '/assets/css/pages/about.css';
 		wp_enqueue_style( 'oac-about', get_theme_file_uri( $about_css ), array( 'oac-theme' ), oac_asset_version( $about_css ) );
+	}
+	if ( $is_home || $is_about ) {
+		$faq_script = '/assets/js/faq-accordion.js';
+		wp_enqueue_script( 'oac-faq-accordion', get_theme_file_uri( $faq_script ), array(), oac_asset_version( $faq_script ), true );
+		wp_script_add_data( 'oac-faq-accordion', 'strategy', 'defer' );
 	}
 	if ( ! $is_home && ! $is_about ) {
 		return;

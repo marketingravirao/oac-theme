@@ -1,8 +1,7 @@
 <section class="about-mission section" aria-labelledby="about-mission-title">
 	<div class="site-width about-mission__grid">
 		<div class="about-mission__portrait" data-animate="fade-left">
-			<img src="<?php echo esc_url( oac_upload_url( '2025/12/About-us-ravirao.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Dr. Ravi Rao, educator at Online Astrology Classes', 'oac-theme' ); ?>" loading="lazy" data-scroll-effect="scale">
-			<p><?php esc_html_e( 'Learn astrology to know yourself better.', 'oac-theme' ); ?></p>
+			<img src="<?php echo esc_url( oac_upload_url( '2025/12/About-us-ravirao.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Dr. Ravi Rao, educator at Online Astrology Classes', 'oac-theme' ); ?>" width="1600" height="1067" loading="lazy" data-scroll-effect="scale">
 		</div>
 		<div class="about-mission__copy" data-animate="fade-right">
 			<p class="eyebrow eyebrow--coral"><?php esc_html_e( 'Our mission', 'oac-theme' ); ?></p>
