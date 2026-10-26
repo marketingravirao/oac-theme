@@ -72,3 +72,32 @@ function oac_about_faqs() {
 		__( 'Will I receive support and assistance during the course?', 'oac-theme' ) => __( 'Yes. Students receive ongoing mentor support, doubt-clearing opportunities, live Q&A, discussion groups, and email or portal support.', 'oac-theme' ),
 	);
 }
+
+function oac_contact_methods() {
+	return array(
+		array(
+			'number'  => '01',
+			'label'   => __( 'Call us', 'oac-theme' ),
+			'value'   => '+91 83203 45627',
+			'detail'  => __( 'Speak with our team about courses and learning paths.', 'oac-theme' ),
+			'url'     => 'tel:+918320345627',
+			'target'  => '',
+		),
+		array(
+			'number'  => '02',
+			'label'   => __( 'Email', 'oac-theme' ),
+			'value'   => 'support@onlineastrologyclasses.com',
+			'detail'  => __( 'Send questions about classes, certificates, or enrolment.', 'oac-theme' ),
+			'url'     => 'mailto:support@onlineastrologyclasses.com',
+			'target'  => '',
+		),
+		array(
+			'number'  => '03',
+			'label'   => __( 'Visit', 'oac-theme' ),
+			'value'   => __( 'B-302, Balleshwar Square, Opp. ISKCON Temple, S.G. Highway, Ahmedabad, 380015', 'oac-theme' ),
+			'detail'  => __( 'Our office is located in Ahmedabad, Gujarat.', 'oac-theme' ),
+			'url'     => 'https://maps.google.com/?q=Dr.+Ravi+Rao+Baleshwar+Square,+B-302,+Sarkhej+-+Gandhinagar+Hwy,+opp.+ISCON+Temple,+Satellite,+Ahmedabad,+Gujarat+380015',
+			'target'  => '_blank',
+		),
+	);
+}

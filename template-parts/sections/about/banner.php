@@ -1,6 +1,6 @@
-<section class="about-banner" aria-labelledby="about-title">
+<section class="page-hero about-banner" aria-labelledby="about-title">
 	<div class="about-banner__media" aria-hidden="true">
-		<img src="<?php echo esc_url( oac_upload_url( '2025/12/WEB-PAGE-1700-x768.1.jpg' ) ); ?>" alt="" fetchpriority="high" data-scroll-effect="parallax" data-speed="0.06">
+		<img src="<?php echo esc_url( oac_upload_url( '2025/12/WEB-PAGE-1700-x768.1.jpg' ) ); ?>" alt="" fetchpriority="high">
 	</div>
 	<div class="site-width about-banner__content">
 		<p class="eyebrow"><?php esc_html_e( 'Our story', 'oac-theme' ); ?></p>

@@ -123,15 +123,6 @@
 				});
 			});
 
-			document.querySelectorAll('[data-scroll-effect="parallax"]').forEach((element) => {
-				const speed = clamp(element.dataset.speed, -0.5, 0.5, 0.2);
-				const offset = speed * 50;
-				gsap.fromTo(element, { yPercent: offset }, {
-					yPercent: -offset,
-					ease: 'none',
-					scrollTrigger: { trigger: element, start: 'top bottom', end: 'bottom top', scrub: 0.5 },
-				});
-			});
 		});
 
 		return () => {
