@@ -8,7 +8,30 @@
 	let isFixed = false;
 	let hideTimer = 0;
 	let transitionHandler = null;
+	const mobileQuery = window.matchMedia('(max-width: 680px)');
 	const threshold = () => window.innerHeight * 0.7;
+
+	const syncSpacer = () => {
+		if (!isFixed) {
+			return;
+		}
+
+		if (mobileQuery.matches) {
+			if (spacer) {
+				spacer.remove();
+				spacer = null;
+			}
+			return;
+		}
+
+		if (!spacer) {
+			spacer = document.createElement('div');
+			spacer.className = 'site-header-spacer';
+			spacer.setAttribute('aria-hidden', 'true');
+			header.before(spacer);
+		}
+		spacer.style.height = `${header.offsetHeight}px`;
+	};
 
 	const cancelHide = () => {
 		if (hideTimer) {
@@ -24,14 +47,10 @@
 	const showHeader = () => {
 		cancelHide();
 		if (!isFixed) {
-			spacer = document.createElement('div');
-			spacer.className = 'site-header-spacer';
-			spacer.setAttribute('aria-hidden', 'true');
-			spacer.style.height = `${header.offsetHeight}px`;
-			header.before(spacer);
+			isFixed = true;
+			syncSpacer();
 			header.classList.add('is-scroll-fixed', 'is-scroll-preparing');
 			header.inert = true;
-			isFixed = true;
 			requestAnimationFrame(() => {
 				if (!isFixed || window.scrollY <= threshold()) {
 					return;
@@ -58,45 +77,23 @@
 	};
 
 	const releaseHeader = () => {
-		if (!isFixed || hideTimer || transitionHandler) {
+		if (!isFixed || window.scrollY > 1) {
 			return;
 		}
 
-		const wasVisible = header.classList.contains('is-scroll-visible');
-		header.inert = true;
-		header.classList.remove('is-scroll-visible');
-
-		const finish = () => {
-			if (window.scrollY > threshold()) {
-				showHeader();
-				return;
-			}
-
-			cancelHide();
-			header.classList.remove('is-scroll-fixed', 'is-scroll-preparing');
-			header.inert = false;
+		cancelHide();
+		header.classList.remove('is-scroll-fixed', 'is-scroll-preparing', 'is-scroll-visible');
+		header.inert = false;
+		if (spacer) {
 			spacer.remove();
 			spacer = null;
-			isFixed = false;
-		};
-
-		if (!wasVisible || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-			finish();
-			return;
 		}
-
-		transitionHandler = (event) => {
-			if (event.target === header && event.propertyName === 'transform') {
-				finish();
-			}
-		};
-		header.addEventListener('transitionend', transitionHandler);
-		hideTimer = window.setTimeout(finish, 500);
+		isFixed = false;
 	};
 
 	const updateHeader = () => {
 		if (isFixed) {
-			spacer.style.height = `${header.offsetHeight}px`;
+			syncSpacer();
 		}
 		if (window.scrollY > threshold()) {
 			showHeader();
@@ -107,5 +104,6 @@
 
 	window.addEventListener('scroll', updateHeader, { passive: true });
 	window.addEventListener('resize', updateHeader, { passive: true });
+	mobileQuery.addEventListener('change', updateHeader);
 	updateHeader();
 })();

@@ -2,7 +2,8 @@
 	const header = document.querySelector('.site-header');
 	const toggle = header?.querySelector('.mobile-menu-toggle');
 	const panel = header?.querySelector('#primary-menu-panel');
-	if (!header || !toggle || !panel) {
+	const backdrop = header?.querySelector('.mobile-menu-backdrop');
+	if (!header || !toggle || !panel || !backdrop) {
 		return;
 	}
 
@@ -14,10 +15,15 @@
 		toggle.setAttribute('aria-expanded', String(isOpen));
 		toggle.setAttribute('aria-label', isOpen ? 'Close main menu' : 'Open main menu');
 		panel.setAttribute('aria-hidden', String(mobileQuery.matches && !isOpen));
+		backdrop.setAttribute('aria-hidden', String(!isOpen));
+		backdrop.tabIndex = isOpen ? 0 : -1;
+		document.body.classList.toggle('has-mobile-menu-open', isOpen);
 		if (mobileQuery.matches && !isOpen) {
 			panel.setAttribute('inert', '');
+			backdrop.setAttribute('inert', '');
 		} else {
 			panel.removeAttribute('inert');
+			backdrop.removeAttribute('inert');
 		}
 	};
 
@@ -27,6 +33,7 @@
 	toggle.addEventListener('click', () => {
 		setOpen(toggle.getAttribute('aria-expanded') !== 'true');
 	});
+	backdrop.addEventListener('click', () => setOpen(false));
 
 	panel.addEventListener('click', (event) => {
 		if (event.target.closest('a')) {

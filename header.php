@@ -7,6 +7,13 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<div class="site-preloader" role="status" aria-label="<?php esc_attr_e( 'Loading page', 'oac-theme' ); ?>">
+	<div class="site-preloader__content">
+		<span class="site-preloader__mark" aria-hidden="true"></span>
+		<span class="site-preloader__label"><?php esc_html_e( 'Preparing your experience', 'oac-theme' ); ?></span>
+	</div>
+</div>
+<div class="site-header-group">
 <div class="contact-bar">
 	<div class="site-width contact-bar__inner">
 		<div class="contact-bar__contact">
@@ -37,6 +44,7 @@
 			<i class="mobile-menu-toggle__close fa-solid fa-xmark" aria-hidden="true"></i>
 		</button>
 		<nav class="main-nav" aria-label="<?php esc_attr_e( 'Main navigation', 'oac-theme' ); ?>">
+			<button class="mobile-menu-backdrop" type="button" aria-label="<?php esc_attr_e( 'Close main menu', 'oac-theme' ); ?>" aria-hidden="true" tabindex="-1"></button>
 			<div class="main-nav__panel" id="primary-menu-panel" aria-hidden="false">
 				<?php
 				wp_nav_menu(
@@ -49,7 +57,24 @@
 					)
 				);
 				?>
+				<div class="mobile-menu-contact">
+					<p class="mobile-menu-contact__label"><?php esc_html_e( 'Get in touch', 'oac-theme' ); ?></p>
+					<a class="mobile-menu-contact__link" href="mailto:support@onlineastrologyclasses.com">
+						<i class="fa-solid fa-envelope" aria-hidden="true"></i>
+						<span><?php esc_html_e( 'support@onlineastrologyclasses.com', 'oac-theme' ); ?></span>
+					</a>
+					<a class="mobile-menu-contact__link" href="tel:+918320345627">
+						<i class="fa-solid fa-phone" aria-hidden="true"></i>
+						<span><?php esc_html_e( 'Call us: +91 83203 45627', 'oac-theme' ); ?></span>
+					</a>
+					<div class="mobile-menu-contact__social" role="group" aria-label="<?php esc_attr_e( 'Follow us on social media', 'oac-theme' ); ?>">
+						<a href="https://www.facebook.com/Onlineastrologyclassesoac/" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+						<a href="https://www.instagram.com/online_astrology_classes/" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+						<a href="https://wa.link/ilyiox" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+					</div>
+				</div>
 			</div>
 		</nav>
 	</div>
 </header>
+</div>

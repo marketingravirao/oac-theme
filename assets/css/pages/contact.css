@@ -42,7 +42,7 @@
 }
 
 @media (max-width: 680px) {
-	.contact-hero__inner { align-items: start; flex-direction: column; gap: var(--space-6); padding-block: var(--space-12); }
+	.contact-hero__inner { align-items: start; flex-direction: column; gap: var(--space-6); padding-block: var(--space-12); padding-top: calc(var(--mobile-header-height) + var(--space-12)); }
 	.contact-hero h1 { font-size: 38px; }
 	.contact-hero__copy > p:last-child { font-size: 15px; }
 	.contact-workspace__grid { grid-template-columns: 1fr; gap: var(--space-8); }

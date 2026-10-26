@@ -7,6 +7,9 @@ function oac_enqueue_assets() {
 	$theme_css = '/assets/css/theme.css';
 	wp_enqueue_style( 'oac-theme', get_theme_file_uri( $theme_css ), array(), oac_asset_version( $theme_css ) );
 	wp_enqueue_style( 'oac-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css', array(), '6.7.2' );
+	$preloader_script = '/assets/js/preloader.js';
+	wp_enqueue_script( 'oac-preloader', get_theme_file_uri( $preloader_script ), array(), oac_asset_version( $preloader_script ), true );
+	wp_script_add_data( 'oac-preloader', 'strategy', 'defer' );
 	$header_script = '/assets/js/header-scroll.js';
 	wp_enqueue_script( 'oac-header-scroll', get_theme_file_uri( $header_script ), array(), oac_asset_version( $header_script ), true );
 	wp_script_add_data( 'oac-header-scroll', 'strategy', 'defer' );

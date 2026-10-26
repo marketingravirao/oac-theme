@@ -96,10 +96,13 @@
 				if (!offsets[type]) {
 					return;
 				}
+				const initialOffset = window.matchMedia('(max-width: 900px)').matches && (type === 'fade-left' || type === 'fade-right')
+					? { y: distance }
+					: offsets[type];
 
 				gsap.fromTo(
 					element,
-					{ autoAlpha: 0, ...offsets[type] },
+					{ autoAlpha: 0, ...initialOffset },
 					{
 						autoAlpha: 1,
 						x: 0,

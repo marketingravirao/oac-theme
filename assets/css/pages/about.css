@@ -46,7 +46,7 @@
 @media (max-width: 680px) {
 	.about-banner__media img { object-position: 58% center; }
 	.about-banner::before { background: linear-gradient(90deg, rgba(29,55,99,.86), rgba(54,99,171,.44)); }
-	.about-banner__content { padding-block: 34px; }
+	.about-banner__content { padding-block: 34px; padding-top: calc(var(--mobile-header-height) + 34px); }
 	.about-banner h1 { font-size: 42px; }
 	.about-overview__layout { gap: var(--space-8); }
 	.about-overview__intro h2 { font-size: 38px; }
