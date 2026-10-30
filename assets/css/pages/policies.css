@@ -1,0 +1,57 @@
+.legal-policy { position: relative; overflow: hidden; padding-block: clamp(64px, 9vw, 112px); background: linear-gradient(180deg, #f3f6fb 0, #fff 460px); }
+.content-page--policy { min-height: 0; padding: 0; }
+.legal-policy::before { position: absolute; top: -220px; right: -140px; width: 520px; aspect-ratio: 1; border: 1px solid rgba(54,99,171,.1); border-radius: 50%; content: ""; box-shadow: 0 0 0 48px rgba(54,99,171,.025), 0 0 0 96px rgba(54,99,171,.02); pointer-events: none; }
+.legal-policy__inner { position: relative; z-index: 1; max-width: 900px; }
+.legal-policy__header { margin-bottom: 40px; text-align: center; }
+.legal-policy__header h1 { margin-bottom: 14px; color: var(--color-primary-deep); font-size: clamp(40px, 6vw, 62px); letter-spacing: -.035em; }
+.legal-policy__header > p:not(.eyebrow) { margin-bottom: 12px; color: var(--color-muted); font-size: 17px; }
+.legal-policy__contact { display: inline-flex; align-items: center; gap: 9px; color: var(--color-primary); font-size: 14px; font-weight: 600; text-decoration: none; }
+.legal-policy__contact:hover { color: var(--color-accent); }
+.legal-policy__list { display: grid; gap: 12px; }
+.legal-policy__document { padding: clamp(22px, 4vw, 40px); border: 1px solid var(--color-line); border-radius: 16px; background: #fff; box-shadow: 0 8px 26px rgba(29,55,99,.045); color: #43536a; font-size: 15px; line-height: 1.8; }
+.legal-policy__document > :last-child { margin-bottom: 0; }
+.legal-policy__document p { margin: 0 0 16px; color: inherit; }
+.legal-policy__document h2, .legal-policy__document h3, .legal-policy__document h4 { margin: 26px 0 12px; color: var(--color-primary-deep); line-height: 1.35; }
+.legal-policy__document h2:first-child, .legal-policy__document h3:first-child { margin-top: 0; }
+.legal-policy__document ul, .legal-policy__document ol { display: grid; gap: 7px; margin: 12px 0 18px; padding-left: 22px; }
+.legal-policy__item { overflow: hidden; margin: 0; border: 1px solid var(--color-line); border-radius: 12px; background: #fff; box-shadow: 0 8px 26px rgba(29,55,99,.045); transition: border-color .2s ease, box-shadow .2s ease; }
+.legal-policy__item.is-open { border-color: rgba(54,99,171,.3); box-shadow: 0 14px 34px rgba(29,55,99,.09); }
+.legal-policy__trigger { display: flex; width: 100%; min-height: 64px; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 20px; border: 0; color: var(--color-primary-deep); background: transparent; font: inherit; font-weight: 650; line-height: 1.45; text-align: left; cursor: pointer; }
+.legal-policy__trigger:focus-visible { outline: 3px solid rgba(54,99,171,.45); outline-offset: -3px; }
+.legal-policy__trigger > span:first-child { display: inline-flex; align-items: center; gap: 9px; }
+.legal-policy__section-icon { display: inline-grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(135deg, var(--color-primary), #5b83c4); font-size: 14px; }
+.legal-policy__item:nth-child(3n) .legal-policy__section-icon { background: linear-gradient(135deg, var(--color-accent), #ff8b78); }
+.legal-policy__chevron { flex: 0 0 auto; color: var(--color-primary); font-size: 13px; transition: transform .3s ease; }
+.legal-policy__item.is-open > .legal-policy__trigger { border-bottom: 1px solid var(--color-line); background: #f8faff; }
+.legal-policy__item.is-open > .legal-policy__trigger .legal-policy__chevron { transform: rotate(180deg); }
+.legal-policy__panel { display: grid; grid-template-rows: 1fr; opacity: 1; }
+.legal-policy__list.is-enhanced .legal-policy__panel { grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .42s cubic-bezier(.22,1,.36,1), opacity .28s ease; }
+.legal-policy__list.is-enhanced .legal-policy__item.is-open > .legal-policy__panel { grid-template-rows: 1fr; opacity: 1; }
+.legal-policy__panel-inner { min-height: 0; overflow: hidden; padding: 0 20px; color: #43536a; font-size: 14px; line-height: 1.75; }
+.legal-policy__item.is-open > .legal-policy__panel > .legal-policy__panel-inner { padding-block: 18px 22px; }
+.legal-policy__panel-inner p { margin: 0 0 12px; }
+.legal-policy__panel-inner ul, .legal-policy__panel-inner ol { display: grid; gap: 7px; margin: 10px 0 14px; padding-left: 22px; }
+.legal-policy__panel-inner li { padding-left: 3px; }
+.legal-policy__panel-inner a { color: var(--color-primary); font-weight: 600; overflow-wrap: anywhere; }
+.legal-policy__panel-inner .oac-highlight, .legal-policy__panel-inner .oac-a2p, .legal-policy__panel-inner .oac-warning { margin-block: 14px; padding: 14px 16px; border: 1px solid rgba(54,99,171,.14); border-left: 3px solid var(--color-primary); border-radius: 10px; background: var(--color-primary-soft); }
+.legal-policy__panel-inner .oac-a2p, .legal-policy__panel-inner .oac-warning { border-color: rgba(255,75,57,.16); border-left-color: var(--color-accent); background: var(--color-accent-soft); }
+.legal-policy__supplement { margin-top: 24px; padding: 24px 28px; border: 1px solid rgba(54,99,171,.14); border-radius: 14px; background: linear-gradient(135deg, #f7f9ff, #fff); }
+.legal-policy__supplement h2 { margin: 0 0 8px; color: var(--color-primary-deep); font-size: 20px; }
+.legal-policy__supplement p { margin: 0; color: #43536a; font-size: 14px; line-height: 1.75; }
+.legal-policy__supplement a { color: var(--color-primary); font-weight: 600; }
+
+@media (max-width: 680px) {
+	.legal-policy { padding-block: 56px; }
+	.legal-policy__header { margin-bottom: 28px; }
+	.legal-policy__header h1 { font-size: 40px; }
+	.legal-policy__header > p:not(.eyebrow) { font-size: 15px; }
+	.legal-policy__trigger { min-height: 60px; gap: 12px; padding: 14px; font-size: 14px; }
+	.legal-policy__document { padding: 20px; font-size: 14px; line-height: 1.75; }
+	.legal-policy__panel-inner { padding-inline: 14px; }
+	.legal-policy__item.is-open > .legal-policy__panel > .legal-policy__panel-inner { padding-block: 14px 18px; }
+	.legal-policy__supplement { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.legal-policy__item, .legal-policy__trigger .legal-policy__chevron, .legal-policy__list.is-enhanced .legal-policy__panel { transition: none; }
+}

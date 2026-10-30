@@ -77,18 +77,42 @@
 	};
 
 	const releaseHeader = () => {
-		if (!isFixed || window.scrollY > 1) {
+		if (!isFixed || hideTimer || transitionHandler) {
 			return;
 		}
 
-		cancelHide();
-		header.classList.remove('is-scroll-fixed', 'is-scroll-preparing', 'is-scroll-visible');
-		header.inert = false;
-		if (spacer) {
-			spacer.remove();
-			spacer = null;
+		const wasVisible = header.classList.contains('is-scroll-visible');
+		header.inert = true;
+		header.classList.remove('is-scroll-visible');
+
+		const finish = () => {
+			if (window.scrollY > threshold()) {
+				showHeader();
+				return;
+			}
+
+			cancelHide();
+			header.classList.remove('is-scroll-fixed', 'is-scroll-preparing', 'is-scroll-visible');
+			header.inert = false;
+			if (spacer) {
+				spacer.remove();
+				spacer = null;
+			}
+			isFixed = false;
+		};
+
+		if (!wasVisible || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			finish();
+			return;
 		}
-		isFixed = false;
+
+		transitionHandler = (event) => {
+			if (event.target === header && event.propertyName === 'top') {
+				finish();
+			}
+		};
+		header.addEventListener('transitionend', transitionHandler);
+		hideTimer = window.setTimeout(finish, 500);
 	};
 
 	const updateHeader = () => {

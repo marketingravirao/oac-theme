@@ -96,8 +96,9 @@
 				if (!offsets[type]) {
 					return;
 				}
-				const initialOffset = window.matchMedia('(max-width: 900px)').matches && (type === 'fade-left' || type === 'fade-right')
-					? { y: distance }
+				const compactViewport = window.matchMedia('(max-width: 1024px)').matches;
+				const initialOffset = compactViewport && (type === 'fade-left' || type === 'fade-right')
+					? { y: Math.min(distance, 32) }
 					: offsets[type];
 
 				gsap.fromTo(

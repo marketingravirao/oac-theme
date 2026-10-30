@@ -16,10 +16,15 @@ function oac_enqueue_assets() {
 	$mobile_menu_script = '/assets/js/mobile-menu.js';
 	wp_enqueue_script( 'oac-mobile-menu', get_theme_file_uri( $mobile_menu_script ), array(), oac_asset_version( $mobile_menu_script ), true );
 	wp_script_add_data( 'oac-mobile-menu', 'strategy', 'defer' );
+	$nav_pill_script = '/assets/js/nav-pill.js';
+	wp_enqueue_script( 'oac-nav-pill', get_theme_file_uri( $nav_pill_script ), array(), oac_asset_version( $nav_pill_script ), true );
+	wp_script_add_data( 'oac-nav-pill', 'strategy', 'defer' );
 
 	$is_home = is_front_page();
 	$is_about = is_page_template( 'templates/template-about.php' );
 	$is_contact = is_page_template( 'templates/template-contact.php' );
+	$is_affiliates = is_page_template( 'templates/template-affiliates.php' );
+	$is_courses = is_post_type_archive( 'course' ) || is_singular( 'course' );
 	if ( $is_home ) {
 		$home_css = '/assets/css/pages/home.css';
 		wp_enqueue_style( 'oac-home', get_theme_file_uri( $home_css ), array( 'oac-theme' ), oac_asset_version( $home_css ) );
@@ -34,12 +39,37 @@ function oac_enqueue_assets() {
 		wp_enqueue_script( 'oac-leadconnector-form', 'https://link.msgsndr.com/js/form_embed.js?ver=4.0.6', array(), null, true );
 		wp_script_add_data( 'oac-leadconnector-form', 'strategy', 'defer' );
 	}
-	if ( $is_home || $is_about ) {
+	if ( $is_affiliates ) {
+		$affiliates_css = '/assets/css/pages/affiliates.css';
+		wp_enqueue_style( 'oac-affiliates', get_theme_file_uri( $affiliates_css ), array( 'oac-theme' ), oac_asset_version( $affiliates_css ) );
+		wp_enqueue_script( 'oac-affiliate-form', 'https://app.onlineastrologyclasses.com/js/form_embed.js', array(), null, true );
+		wp_script_add_data( 'oac-affiliate-form', 'strategy', 'defer' );
+	}
+	if ( $is_courses ) {
+		$courses_css = '/assets/css/pages/courses.css';
+		wp_enqueue_style( 'oac-courses', get_theme_file_uri( $courses_css ), array( 'oac-theme' ), oac_asset_version( $courses_css ) );
+	}
+	if ( is_page_template(
+		array(
+			'templates/template-policy-privacy.php',
+			'templates/template-policy-terms.php',
+			'templates/template-policy-refund.php',
+			'templates/template-policy-cancellation.php',
+			'templates/template-policy-cookies.php',
+		)
+	) ) {
+		$policies_css = '/assets/css/pages/policies.css';
+		wp_enqueue_style( 'oac-policies', get_theme_file_uri( $policies_css ), array( 'oac-theme' ), oac_asset_version( $policies_css ) );
+		$policies_script = '/assets/js/policy-accordion.js';
+		wp_enqueue_script( 'oac-policy-accordion', get_theme_file_uri( $policies_script ), array(), oac_asset_version( $policies_script ), true );
+		wp_script_add_data( 'oac-policy-accordion', 'strategy', 'defer' );
+	}
+	if ( $is_home || $is_about || $is_courses ) {
 		$faq_script = '/assets/js/faq-accordion.js';
 		wp_enqueue_script( 'oac-faq-accordion', get_theme_file_uri( $faq_script ), array(), oac_asset_version( $faq_script ), true );
 		wp_script_add_data( 'oac-faq-accordion', 'strategy', 'defer' );
 	}
-	if ( ! $is_home && ! $is_about && ! $is_contact ) {
+	if ( ! $is_home && ! $is_about && ! $is_contact && ! $is_affiliates && ! $is_courses ) {
 		return;
 	}
 
