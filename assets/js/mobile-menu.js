@@ -1,8 +1,8 @@
 (() => {
 	const header = document.querySelector('.site-header');
-	const toggle = header?.querySelector('.mobile-menu-toggle');
-	const panel = header?.querySelector('#primary-menu-panel');
-	const backdrop = header?.querySelector('.mobile-menu-backdrop');
+	const toggle = header?.querySelector('.menu-toggle');
+	const panel = header?.querySelector('#main-menu');
+	const backdrop = header?.querySelector('.mobile-menu__backdrop');
 	if (!header || !toggle || !panel || !backdrop) {
 		return;
 	}
@@ -70,21 +70,49 @@
 		});
 	});
 
+	const resetSubmenus = () => {
+		submenuParents.forEach((item) => {
+			const submenu = item.querySelector(':scope > .sub-menu');
+			const submenuToggle = item.querySelector(':scope > .submenu-toggle');
+			item.classList.remove('submenu-open', 'is-submenu-open');
+			if (submenuToggle) {
+				submenuToggle.setAttribute('aria-expanded', 'false');
+			}
+			if (submenu) {
+				if (mobileQuery.matches) {
+					submenu.style.maxHeight = '0px';
+					submenu.setAttribute('inert', '');
+				} else {
+					submenu.style.removeProperty('max-height');
+					submenu.removeAttribute('inert');
+				}
+			}
+		});
+	};
+
 	const setOpen = (open) => {
 		const isOpen = mobileQuery.matches && open;
 		header.classList.toggle('is-menu-open', isOpen);
+		header.classList.toggle('mobile-menu-is-open', isOpen);
+		document.body.classList.toggle('has-mobile-menu-open', isOpen);
+		document.body.classList.toggle('mobile-menu-is-open', isOpen);
 		toggle.setAttribute('aria-expanded', String(isOpen));
 		toggle.setAttribute('aria-label', isOpen ? 'Close main menu' : 'Open main menu');
 		panel.setAttribute('aria-hidden', String(mobileQuery.matches && !isOpen));
 		backdrop.setAttribute('aria-hidden', String(!isOpen));
 		backdrop.tabIndex = isOpen ? 0 : -1;
-		document.body.classList.toggle('has-mobile-menu-open', isOpen);
-		if (mobileQuery.matches && !isOpen) {
-			panel.setAttribute('inert', '');
-			backdrop.setAttribute('inert', '');
-		} else {
+		if (isOpen) {
 			panel.removeAttribute('inert');
 			backdrop.removeAttribute('inert');
+		} else {
+			resetSubmenus();
+			if (mobileQuery.matches) {
+				panel.setAttribute('inert', '');
+				backdrop.setAttribute('inert', '');
+			} else {
+				panel.removeAttribute('inert');
+				backdrop.removeAttribute('inert');
+			}
 		}
 	};
 
