@@ -16,14 +16,6 @@
 			return;
 		}
 
-		if (mobileQuery.matches) {
-			if (spacer) {
-				spacer.remove();
-				spacer = null;
-			}
-			return;
-		}
-
 		if (!spacer) {
 			spacer = document.createElement('div');
 			spacer.className = 'site-header-spacer';
@@ -80,6 +72,9 @@
 		if (!isFixed || hideTimer || transitionHandler) {
 			return;
 		}
+		if (mobileQuery.matches && document.body.classList.contains('mobile-menu-is-open')) {
+			return;
+		}
 
 		const wasVisible = header.classList.contains('is-scroll-visible');
 		header.inert = true;
@@ -106,13 +101,14 @@
 			return;
 		}
 
+		const releaseDuration = mobileQuery.matches ? 180 : 500;
 		transitionHandler = (event) => {
-			if (event.target === header && event.propertyName === 'top') {
+			if (event.target === header && event.propertyName === 'transform') {
 				finish();
 			}
 		};
 		header.addEventListener('transitionend', transitionHandler);
-		hideTimer = window.setTimeout(finish, 500);
+		hideTimer = window.setTimeout(finish, releaseDuration);
 	};
 
 	const updateHeader = () => {
