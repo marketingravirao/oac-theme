@@ -2,6 +2,15 @@
 get_header();
 
 $paged = max( 1, get_query_var( 'paged' ) );
+if ( is_category() ) {
+	$archive_title = single_cat_title( '', false );
+} elseif ( is_tag() ) {
+	$archive_title = single_tag_title( '', false );
+} elseif ( is_tax() || is_author() || is_date() ) {
+	$archive_title = wp_strip_all_tags( get_the_archive_title() );
+} else {
+	$archive_title = __( 'Astrology Insights', 'oac-theme' );
+}
 $query_post_ids = array();
 foreach ( $GLOBALS['wp_query']->posts as $query_post ) {
 	$query_post_ids[] = (int) $query_post->ID;
@@ -26,7 +35,7 @@ if ( 1 === $paged ) {
 	<section class="blogs-hero" aria-labelledby="blogs-title">
 		<div class="site-width blogs-hero__inner">
 			<p class="eyebrow eyebrow--coral" data-animate="fade-up"><?php esc_html_e( 'Astrology insights', 'oac-theme' ); ?></p>
-			<h1 id="blogs-title" data-animate="words" data-trigger="load"><?php echo esc_html( is_category() ? single_cat_title( '', false ) : __( 'Astrology Insights', 'oac-theme' ) ); ?></h1>
+			<h1 id="blogs-title" data-animate="words" data-trigger="load"><?php echo esc_html( $archive_title ); ?></h1>
 			<p data-animate="fade-up" data-delay="0.1"><?php esc_html_e( 'Practical guidance on astrology, numerology, prediction, and conscious personal growth.', 'oac-theme' ); ?></p>
 		</div>
 	</section>

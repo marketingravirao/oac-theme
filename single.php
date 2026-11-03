@@ -7,24 +7,25 @@ while ( have_posts() ) :
 	$categories = get_the_category();
 	?>
 	<main class="blog-single">
-		<header class="blog-article-hero" aria-labelledby="blog-article-title">
-			<div class="site-width blog-article-hero__inner">
-				<p class="eyebrow eyebrow--coral" data-animate="fade-up"><?php echo $categories ? esc_html( $categories[0]->name ) : esc_html__( 'Astrology Insight', 'oac-theme' ); ?></p>
-				<h1 id="blog-article-title" data-animate="words" data-trigger="load"><?php the_title(); ?></h1>
-				<div class="blog-article-hero__meta" data-animate="fade-up" data-delay="0.1">
-					<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
-					<span aria-hidden="true">•</span>
-					<span><?php echo esc_html( sprintf( _n( '%d minute read', '%d minute read', $read_time, 'oac-theme' ), $read_time ) ); ?></span>
-				</div>
-			</div>
-		</header>
-
 		<article <?php post_class( 'blog-article' ); ?>>
-			<?php if ( has_post_thumbnail() ) : ?>
-				<div class="site-width blog-article__featured" data-animate="fade-up" data-scroll-effect="scale" data-scale="0.94">
-					<?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?>
+			<section class="blog-article-hero<?php echo has_post_thumbnail() ? ' blog-article-hero--has-image' : ''; ?>" aria-labelledby="blog-article-title">
+				<div class="site-width blog-article-hero__inner">
+					<div class="blog-article-hero__copy">
+					<p class="eyebrow eyebrow--coral" data-animate="fade-up"><?php echo $categories ? esc_html( $categories[0]->name ) : esc_html__( 'Astrology Insight', 'oac-theme' ); ?></p>
+					<h1 id="blog-article-title" data-animate="words" data-trigger="load"><?php echo esc_html( get_the_title() ); ?></h1>
+						<div class="blog-article-hero__meta" data-animate="fade-up" data-delay="0.1">
+						<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+						<span aria-hidden="true">•</span>
+						<span><?php echo esc_html( sprintf( _n( '%d minute read', '%d minute read', $read_time, 'oac-theme' ), $read_time ) ); ?></span>
+					</div>
 				</div>
-			<?php endif; ?>
+				<?php if ( has_post_thumbnail() ) : ?>
+						<div class="blog-article-hero__featured" data-animate="fade-up" data-scroll-effect="scale" data-scale="0.94">
+						<?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+			</section>
 			<div class="site-width blog-article__layout">
 				<div class="blog-article__content" data-animate="fade-up" data-delay="0.08">
 					<?php the_content(); ?>
@@ -61,7 +62,7 @@ while ( have_posts() ) :
 								?>
 								<a class="blog-article__related" href="<?php the_permalink(); ?>">
 									<span><?php echo esc_html( get_the_date() ); ?></span>
-									<strong><?php the_title(); ?></strong>
+									<strong><?php echo esc_html( get_the_title() ); ?></strong>
 									<em aria-hidden="true">→</em>
 								</a>
 							<?php

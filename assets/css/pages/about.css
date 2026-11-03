@@ -3,7 +3,6 @@
 .about-banner__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
 .about-banner::before { position: absolute; z-index: 1; inset: 0; content: ""; background: linear-gradient(90deg, rgba(24,45,85,.78), rgba(63,112,185,.18) 58%, rgba(242,85,67,.18)); }
 .about-banner__content { position: relative; z-index: 1; padding-block: 48px; }
-.about-banner .eyebrow { color: var(--color-accent-light); }
 .about-banner h1 { margin: 0; font-size: 58px; }
 
 .about-overview { background: var(--color-primary-soft); }

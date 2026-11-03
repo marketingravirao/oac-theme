@@ -87,13 +87,21 @@ function oac_enqueue_assets() {
 	$scroll_trigger = '/assets/vendor/gsap/ScrollTrigger.min.js';
 	$split_text = '/assets/vendor/gsap/SplitText.min.js';
 	$animations = '/assets/js/animations.js';
+	$home_hero = '/assets/js/home-hero-slider.js';
 
 	wp_enqueue_script( 'oac-gsap', get_theme_file_uri( $gsap_core ), array(), oac_asset_version( $gsap_core ), true );
 	wp_enqueue_script( 'oac-scroll-trigger', get_theme_file_uri( $scroll_trigger ), array( 'oac-gsap' ), oac_asset_version( $scroll_trigger ), true );
 	wp_enqueue_script( 'oac-split-text', get_theme_file_uri( $split_text ), array( 'oac-gsap' ), oac_asset_version( $split_text ), true );
 	wp_enqueue_script( 'oac-animations', get_theme_file_uri( $animations ), array( 'oac-gsap', 'oac-scroll-trigger', 'oac-split-text' ), oac_asset_version( $animations ), true );
+	if ( $is_home ) {
+		wp_enqueue_script( 'oac-home-hero', get_theme_file_uri( $home_hero ), array( 'oac-gsap' ), oac_asset_version( $home_hero ), true );
+	}
 
-	foreach ( array( 'oac-gsap', 'oac-scroll-trigger', 'oac-split-text', 'oac-animations' ) as $handle ) {
+	$script_handles = array( 'oac-gsap', 'oac-scroll-trigger', 'oac-split-text', 'oac-animations' );
+	if ( $is_home ) {
+		$script_handles[] = 'oac-home-hero';
+	}
+	foreach ( $script_handles as $handle ) {
 		wp_script_add_data( $handle, 'strategy', 'defer' );
 	}
 }
