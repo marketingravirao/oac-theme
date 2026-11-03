@@ -25,6 +25,7 @@ function oac_enqueue_assets() {
 	$is_contact = is_page_template( 'templates/template-contact.php' );
 	$is_affiliates = is_page_template( 'templates/template-affiliates.php' );
 	$is_courses = is_post_type_archive( 'course' ) || is_singular( 'course' );
+	$is_blogs = is_home() || is_category() || is_tag() || is_post_type_archive( 'post' ) || is_singular( 'post' );
 	if ( $is_home ) {
 		$home_css = '/assets/css/pages/home.css';
 		wp_enqueue_style( 'oac-home', get_theme_file_uri( $home_css ), array( 'oac-theme' ), oac_asset_version( $home_css ) );
@@ -54,6 +55,10 @@ function oac_enqueue_assets() {
 			wp_script_add_data( 'oac-course-curriculum', 'strategy', 'defer' );
 		}
 	}
+	if ( $is_blogs ) {
+		$blogs_css = '/assets/css/pages/blogs.css';
+		wp_enqueue_style( 'oac-blogs', get_theme_file_uri( $blogs_css ), array( 'oac-theme' ), oac_asset_version( $blogs_css ) );
+	}
 	if ( is_page_template(
 		array(
 			'templates/template-policy-privacy.php',
@@ -74,7 +79,7 @@ function oac_enqueue_assets() {
 		wp_enqueue_script( 'oac-faq-accordion', get_theme_file_uri( $faq_script ), array(), oac_asset_version( $faq_script ), true );
 		wp_script_add_data( 'oac-faq-accordion', 'strategy', 'defer' );
 	}
-	if ( ! $is_home && ! $is_about && ! $is_contact && ! $is_affiliates && ! $is_courses ) {
+	if ( ! $is_home && ! $is_about && ! $is_contact && ! $is_affiliates && ! $is_courses && ! $is_blogs ) {
 		return;
 	}
 
