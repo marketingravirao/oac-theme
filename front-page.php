@@ -2,6 +2,7 @@
 <main id="home">
 	<?php
 	get_template_part( 'template-parts/sections/home/hero' );
+	get_template_part( 'template-parts/sections/home/courses' );
 	get_template_part( 'template-parts/sections/home/about' );
 	get_template_part( 'template-parts/sections/home/questions' );
 	get_template_part( 'template-parts/sections/home/astrology' );

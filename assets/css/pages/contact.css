@@ -1,4 +1,4 @@
-.contact-hero { color: #fff; background: linear-gradient(118deg, var(--color-primary-deep) 0%, var(--color-primary) 72%, #29477e 100%); }
+.contact-hero { color: #fff; background: var(--gradient-brand); }
 .contact-hero::after { position: absolute; top: -180px; right: 8%; width: 420px; height: 420px; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; content: ""; box-shadow: 0 0 0 42px rgba(255,255,255,.035), 0 0 0 84px rgba(255,255,255,.025); pointer-events: none; }
 .contact-hero__inner { position: relative; z-index: 1; display: flex; align-items: end; justify-content: space-between; gap: var(--space-8); padding-block: var(--space-16); }
 .contact-hero .eyebrow { color: var(--color-accent-light); }

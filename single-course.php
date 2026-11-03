@@ -48,9 +48,17 @@ while ( have_posts() ) :
 			<section class="course-purchase" aria-label="<?php esc_attr_e( 'Course enrollment', 'oac-theme' ); ?>">
 				<div class="site-width course-purchase__inner" data-animate="fade-up">
 					<div class="course-purchase__details">
-						<?php if ( $price ) : ?><div><span><?php esc_html_e( 'Course fee', 'oac-theme' ); ?></span><strong><?php echo esc_html( $price ); ?></strong></div><?php endif; ?>
-						<?php if ( $duration ) : ?><div><span><?php esc_html_e( 'Access period', 'oac-theme' ); ?></span><strong><?php echo esc_html( $duration ); ?></strong></div><?php endif; ?>
-						<?php if ( $lesson_count ) : ?><div><span><?php esc_html_e( 'Course content', 'oac-theme' ); ?></span><strong><?php echo esc_html( $lesson_count ); ?></strong></div><?php endif; ?>
+						<?php if ( $price ) : ?>
+							<?php $formatted_price = oac_format_course_price( $price ); ?>
+							<?php if ( $formatted_price ) : ?>
+								<div class="course-purchase__fee">
+									<span><?php esc_html_e( 'Course fee', 'oac-theme' ); ?></span>
+									<strong><?php if ( $formatted_price['currency'] ) : ?><b aria-hidden="true"><?php echo esc_html( $formatted_price['currency'] ); ?></b><?php endif; ?><?php echo esc_html( $formatted_price['amount'] ); ?><?php if ( $formatted_price['currency'] ) : ?><small><?php esc_html_e( 'INR', 'oac-theme' ); ?></small><?php endif; ?></strong>
+								</div>
+							<?php endif; ?>
+						<?php endif; ?>
+						<?php if ( $duration ) : ?><div class="course-purchase__meta"><span><?php esc_html_e( 'Access period', 'oac-theme' ); ?></span><strong><?php echo esc_html( $duration ); ?></strong></div><?php endif; ?>
+						<?php if ( $lesson_count ) : ?><div class="course-purchase__meta"><span><?php esc_html_e( 'Course content', 'oac-theme' ); ?></span><strong><?php echo esc_html( $lesson_count ); ?></strong></div><?php endif; ?>
 					</div>
 					<?php if ( $enroll_url ) : ?>
 						<a class="button button--coral" href="<?php echo esc_url( $enroll_url ); ?>" target="_blank" rel="noopener noreferrer">
@@ -98,23 +106,30 @@ while ( have_posts() ) :
 
 		<?php if ( is_array( $curriculum ) && $curriculum ) : ?>
 			<section class="section course-curriculum" aria-labelledby="course-curriculum-title">
-				<div class="site-width course-content-grid">
-					<header class="course-section-heading" data-animate="fade-right">
+				<div class="site-width">
+					<header class="course-curriculum__heading" data-animate="fade-up">
 						<p class="eyebrow"><?php esc_html_e( 'What you will study', 'oac-theme' ); ?></p>
 						<h2 id="course-curriculum-title" data-animate="words"><?php esc_html_e( 'A structured learning journey.', 'oac-theme' ); ?></h2>
+						<p><?php echo esc_html( sprintf( _n( '%d focused module', '%d focused modules', count( $curriculum ), 'oac-theme' ), count( $curriculum ) ) ); ?></p>
 					</header>
-					<ol class="course-curriculum__list" data-animate-group="fade-up" data-stagger="0.08">
+					<div class="course-curriculum__list" data-curriculum-accordion data-animate-group="fade-up" data-stagger="0.06">
 						<?php foreach ( $curriculum as $index => $module ) : ?>
 							<?php if ( ! empty( $module['module_title'] ) ) : ?>
-								<li data-animate-item>
-									<span class="course-curriculum__number"><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
-									<div><h3><?php echo esc_html( $module['module_title'] ); ?></h3>
-										<?php if ( ! empty( $module['module_summary'] ) ) : ?><p><?php echo esc_html( $module['module_summary'] ); ?></p><?php endif; ?>
-									</div>
-								</li>
+								<div class="course-curriculum__item<?php echo 0 === $index ? ' is-open' : ''; ?>" data-curriculum-item data-animate-item>
+									<button class="course-curriculum__trigger" type="button" aria-expanded="<?php echo 0 === $index ? 'true' : 'false'; ?>" aria-controls="course-curriculum-panel-<?php echo esc_attr( $course_id . '-' . $index ); ?>">
+										<span class="course-curriculum__number"><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
+										<span class="course-curriculum__title"><?php echo esc_html( $module['module_title'] ); ?></span>
+										<span class="course-curriculum__toggle" aria-hidden="true"></span>
+									</button>
+									<?php if ( ! empty( $module['module_summary'] ) ) : ?>
+										<div class="course-curriculum__panel" id="course-curriculum-panel-<?php echo esc_attr( $course_id . '-' . $index ); ?>" aria-hidden="<?php echo 0 === $index ? 'false' : 'true'; ?>">
+											<div class="course-curriculum__body"><p><?php echo esc_html( $module['module_summary'] ); ?></p></div>
+										</div>
+									<?php endif; ?>
+								</div>
 							<?php endif; ?>
 						<?php endforeach; ?>
-					</ol>
+					</div>
 				</div>
 			</section>
 		<?php endif; ?>

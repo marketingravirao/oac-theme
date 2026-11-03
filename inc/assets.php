@@ -48,6 +48,11 @@ function oac_enqueue_assets() {
 	if ( $is_courses ) {
 		$courses_css = '/assets/css/pages/courses.css';
 		wp_enqueue_style( 'oac-courses', get_theme_file_uri( $courses_css ), array( 'oac-theme' ), oac_asset_version( $courses_css ) );
+		if ( is_singular( 'course' ) ) {
+			$curriculum_script = '/assets/js/course-curriculum.js';
+			wp_enqueue_script( 'oac-course-curriculum', get_theme_file_uri( $curriculum_script ), array(), oac_asset_version( $curriculum_script ), true );
+			wp_script_add_data( 'oac-course-curriculum', 'strategy', 'defer' );
+		}
 	}
 	if ( is_page_template(
 		array(

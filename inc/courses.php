@@ -181,8 +181,8 @@ function oac_register_course_fields() {
 					'label'        => __( 'Course price', 'oac-theme' ),
 					'name'         => 'course_price',
 					'type'         => 'text',
-					'placeholder'  => __( 'For example: $125', 'oac-theme' ),
-					'instructions' => __( 'Enter the price exactly as you want it displayed.', 'oac-theme' ),
+					'placeholder'  => __( 'For example: ₹12500', 'oac-theme' ),
+					'instructions' => __( 'Enter the amount in Indian Rupees. Use the ₹ symbol, such as ₹12500.', 'oac-theme' ),
 					'wrapper'      => array( 'width' => '33' ),
 				),
 				array(
@@ -313,6 +313,32 @@ function oac_course_field( $field_name, $post_id = 0 ) {
 	return get_field( $field_name, $post_id ? $post_id : get_the_ID() );
 }
 
+function oac_format_course_price( $price ) {
+	$price = trim( (string) $price );
+	if ( '' === $price ) {
+		return '';
+	}
+
+	if ( preg_match( '/^₹\s*(.+)$/u', $price, $matches ) ) {
+		return array( 'currency' => '₹', 'amount' => $matches[1] );
+	}
+	if ( preg_match( '/^(?:INR|Rs\.?)\s*(.+)$/iu', $price, $matches ) ) {
+		return array( 'currency' => '₹', 'amount' => $matches[1] );
+	}
+
+	$amount = ltrim( $price, '$€£₹' );
+	$amount = trim( $amount );
+	if ( '' === $amount ) {
+		return '';
+	}
+
+	if ( preg_match( '/^[A-Za-z]/', $amount ) ) {
+		return array( 'currency' => '', 'amount' => $amount );
+	}
+
+	return array( 'currency' => '₹', 'amount' => $amount );
+}
+
 function oac_course_cover_url( $post_id = 0 ) {
 	$post_id = $post_id ? $post_id : get_the_ID();
 	$image   = oac_course_field( 'course_cover_image', $post_id );
@@ -364,7 +390,8 @@ function oac_course_admin_column_content( $column, $post_id ) {
 	}
 
 	if ( 'course_price' === $column ) {
-		echo esc_html( (string) oac_course_field( 'course_price', $post_id ) ?: '—' );
+		$price = oac_format_course_price( oac_course_field( 'course_price', $post_id ) );
+		echo $price ? esc_html( $price['currency'] . ' ' . $price['amount'] ) : '&mdash;';
 	}
 
 	if ( 'course_featured' === $column ) {
