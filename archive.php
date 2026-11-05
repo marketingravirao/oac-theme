@@ -4,12 +4,16 @@ get_header();
 $paged = max( 1, get_query_var( 'paged' ) );
 if ( is_category() ) {
 	$archive_title = single_cat_title( '', false );
+	$archive_subtitle = __( 'Practical guidance on astrology, numerology, prediction, and conscious personal growth.', 'oac-theme' );
 } elseif ( is_tag() ) {
 	$archive_title = single_tag_title( '', false );
+	$archive_subtitle = __( 'Practical guidance on astrology, numerology, prediction, and conscious personal growth.', 'oac-theme' );
 } elseif ( is_tax() || is_author() || is_date() ) {
 	$archive_title = wp_strip_all_tags( get_the_archive_title() );
+	$archive_subtitle = __( 'Practical guidance on astrology, numerology, prediction, and conscious personal growth.', 'oac-theme' );
 } else {
-	$archive_title = __( 'Astrology Insights', 'oac-theme' );
+	$archive_title = __( 'Jyotirmaya (ज्योतिर्मय) - Illuminating Jyotisha', 'oac-theme' );
+	$archive_subtitle = __( 'Insights into Vedic Astrology, Ancient Wisdom and practical knowledge', 'oac-theme' );
 }
 $query_post_ids = array();
 foreach ( $GLOBALS['wp_query']->posts as $query_post ) {
@@ -36,7 +40,7 @@ if ( 1 === $paged ) {
 		<div class="site-width blogs-hero__inner">
 			<p class="eyebrow eyebrow--coral" data-animate="fade-up"><?php esc_html_e( 'Astrology insights', 'oac-theme' ); ?></p>
 			<h1 id="blogs-title" data-animate="words" data-trigger="load"><?php echo esc_html( $archive_title ); ?></h1>
-			<p data-animate="fade-up" data-delay="0.1"><?php esc_html_e( 'Practical guidance on astrology, numerology, prediction, and conscious personal growth.', 'oac-theme' ); ?></p>
+			<p data-animate="fade-up" data-delay="0.1"><?php echo esc_html( $archive_subtitle ); ?></p>
 		</div>
 	</section>
 

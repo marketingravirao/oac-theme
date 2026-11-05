@@ -1,8 +1,7 @@
+/*
+ * Temporary hero slider implementation (disabled).
+ *
 (() => {
-	if (!window.gsap) {
-		return;
-	}
-
 	const slider = document.querySelector('[data-home-hero-slider]');
 	if (!slider) {
 		return;
@@ -10,7 +9,7 @@
 
 	const hero = slider.closest('.hero');
 	const slides = Array.from(slider.querySelectorAll('[data-hero-slide]'));
-	const dots = Array.from(hero.querySelectorAll('[data-hero-dot]'));
+	const numbers = Array.from(hero.querySelectorAll('[data-hero-dot]'));
 	if (slides.length < 2) {
 		return;
 	}
@@ -22,39 +21,23 @@
 	const interval = 6000;
 	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	const setActiveDot = (index) => {
-		dots.forEach((dot, dotIndex) => {
-			const active = dotIndex === index;
-			dot.classList.toggle('is-active', active);
-			dot.setAttribute('aria-current', active ? 'true' : 'false');
+	const setActiveNumber = (index) => {
+		numbers.forEach((number, numberIndex) => {
+			const active = numberIndex === index;
+			number.classList.toggle('is-active', active);
+			number.setAttribute('aria-current', active ? 'true' : 'false');
 		});
 	};
 
-	if (!reducedMotion) {
-		const firstContent = slides[activeIndex].querySelector('.hero__content');
-		const firstItems = firstContent.querySelectorAll('.eyebrow, h1, .hero__intro, .hero__actions');
+	slides.forEach((slide, index) => {
+		slide.classList.toggle('is-active', index === activeIndex);
+	});
 
-		window.gsap.timeline({ defaults: { ease: 'power3.out' } })
-			.fromTo(slides[activeIndex].querySelector('.hero__media img'), {
-				scale: 1.06,
-				filter: 'brightness(.88)',
-			}, {
-				scale: 1,
-				filter: 'brightness(1)',
-				duration: 1.4,
-				ease: 'power2.out',
-			}, 0)
-			.fromTo(firstItems, {
-				y: 34,
-				autoAlpha: 0,
-			}, {
-				y: 0,
-				autoAlpha: 1,
-				duration: 0.75,
-				stagger: 0.09,
-				ease: 'power3.out',
-				clearProps: 'transform,opacity,visibility',
-			}, 0.2);
+	if (!reducedMotion && slides[activeIndex]) {
+		slides[activeIndex].classList.add('is-entering');
+		window.setTimeout(() => {
+			slides[activeIndex].classList.remove('is-entering');
+		}, 1000);
 	}
 
 	const showSlide = (nextIndex) => {
@@ -66,75 +49,25 @@
 
 		const current = slides[activeIndex];
 		const next = slides[nextIndex];
-		const direction = nextIndex > activeIndex ? 1 : -1;
 		current.setAttribute('aria-hidden', 'true');
 		next.removeAttribute('aria-hidden');
-		next.style.visibility = 'visible';
-
-		if (reducedMotion) {
-			window.gsap.set(current, { autoAlpha: 0 });
-			window.gsap.set(next, { autoAlpha: 1 });
-			window.gsap.set(current.querySelector('.hero__content'), { clearProps: 'transform,opacity,visibility' });
-			window.gsap.set(next.querySelector('.hero__content'), { clearProps: 'transform,opacity,visibility' });
-			window.gsap.set(current.querySelectorAll('.eyebrow, h1, .hero__intro, .hero__actions'), {
-				x: 0,
-				y: 0,
-				autoAlpha: 1,
-				clearProps: 'transform,opacity,visibility',
-			});
-			window.gsap.set(next.querySelectorAll('.eyebrow, h1, .hero__intro, .hero__actions'), {
-				x: 0,
-				y: 0,
-				autoAlpha: 1,
-				clearProps: 'transform,opacity,visibility',
-			});
-			transitioning = false;
-		} else {
-			const currentContent = current.querySelector('.hero__content');
-			const nextContent = next.querySelector('.hero__content');
-			const nextItems = nextContent.querySelectorAll('.eyebrow, h1, .hero__intro, .hero__actions');
-			const currentItems = currentContent.querySelectorAll('.eyebrow, h1, .hero__intro, .hero__actions');
-
-			window.gsap.timeline({
-				defaults: { ease: 'power3.out' },
-				onComplete: () => {
-					window.gsap.set(current, { visibility: 'hidden', xPercent: 0 });
-					window.gsap.set(currentItems, { x: 0, y: 0, autoAlpha: 1, clearProps: 'transform,opacity,visibility' });
-					window.gsap.set(currentContent, { x: 0, y: 0, clearProps: 'transform,opacity,visibility' });
-					window.gsap.set(next, { xPercent: 0, visibility: 'visible' });
-					window.gsap.set(nextItems, { x: 0, y: 0, autoAlpha: 1, clearProps: 'transform,opacity,visibility' });
-					window.gsap.set(next.querySelector('.hero__media img'), { scale: 1, filter: 'brightness(1)', clearProps: 'transform,filter' });
-					transitioning = false;
-				},
-			})
-				.fromTo(next.querySelector('.hero__media img'), { scale: 1.07, filter: 'brightness(.82)' }, {
-					scale: 1,
-					filter: 'brightness(1)',
-					duration: 1.3,
-					ease: 'power2.out',
-				}, 0.15)
-				.set(next, { xPercent: direction * 100, autoAlpha: 1 }, 0)
-				.to(current, { xPercent: direction * -100, autoAlpha: 1, duration: 1.05 }, 0)
-				.to(next, { xPercent: 0, autoAlpha: 1, duration: 1.05 }, 0)
-				.to(currentItems, {
-					x: direction * -24,
-					autoAlpha: 0,
-					duration: 0.45,
-					stagger: 0.035,
-					ease: 'power2.in',
-				}, 0)
-				.fromTo(nextItems, { y: 38, autoAlpha: 0 }, {
-					y: 0,
-					autoAlpha: 1,
-					duration: 0.75,
-					stagger: 0.09,
-					ease: 'power3.out',
-					clearProps: 'transform,opacity,visibility',
-				}, 0.36);
+		current.classList.remove('is-active');
+		current.classList.remove('is-entering');
+		next.classList.add('is-active');
+		if (!reducedMotion) {
+			next.classList.add('is-entering');
 		}
 
 		activeIndex = nextIndex;
-		setActiveDot(activeIndex);
+		setActiveNumber(activeIndex);
+		window.setTimeout(() => {
+			transitioning = false;
+		}, reducedMotion ? 0 : 650);
+		if (!reducedMotion) {
+			window.setTimeout(() => {
+				next.classList.remove('is-entering');
+			}, 1000);
+		}
 	};
 
 	const restartTimer = () => {
@@ -144,12 +77,46 @@
 		}
 	};
 
-	dots.forEach((dot) => {
-		dot.addEventListener('click', () => {
-			showSlide(Number(dot.dataset.heroDot) || 0);
+	numbers.forEach((number) => {
+		number.addEventListener('click', () => {
+			showSlide(Number(number.dataset.heroDot) || 0);
 			restartTimer();
 		});
 	});
+
+	let touchStartX = 0;
+	let touchStartY = 0;
+	let touchStarted = false;
+	const swipeThreshold = 50;
+
+	slider.addEventListener('touchstart', (event) => {
+		const touch = event.changedTouches[0];
+		touchStartX = touch.clientX;
+		touchStartY = touch.clientY;
+		touchStarted = true;
+	}, { passive: true });
+
+	slider.addEventListener('touchend', (event) => {
+		if (!touchStarted) {
+			return;
+		}
+		touchStarted = false;
+
+		const touch = event.changedTouches[0];
+		const deltaX = touch.clientX - touchStartX;
+		const deltaY = touch.clientY - touchStartY;
+
+		if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) <= Math.abs(deltaY)) {
+			return;
+		}
+
+		showSlide(deltaX < 0 ? activeIndex + 1 : activeIndex - 1);
+		restartTimer();
+	}, { passive: true });
+
+	slider.addEventListener('touchcancel', () => {
+		touchStarted = false;
+	}, { passive: true });
 
 	hero.addEventListener('mouseenter', () => {
 		paused = true;
@@ -173,3 +140,4 @@
 
 	restartTimer();
 })();
+*/

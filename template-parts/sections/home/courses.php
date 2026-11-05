@@ -16,9 +16,10 @@ if ( ! $courses_query->have_posts() ) {
 	<div class="site-width">
 		<div class="section-heading" data-animate="fade-up">
 			<p class="eyebrow"><?php esc_html_e( 'Explore our courses', 'oac-theme' ); ?></p>
-			<h2 id="home-courses-title" data-animate="words"><?php esc_html_e( 'Choose your path.', 'oac-theme' ); ?></h2>
+			<h2 id="home-courses-title" data-animate="words"><?php esc_html_e( 'Choose your path', 'oac-theme' ); ?></h2>
 		</div>
-		<div class="home-courses__grid" data-animate-group="fade-up" data-stagger="0.08">
+		<div class="home-courses__slider swiper" data-home-courses-slider>
+			<div class="swiper-wrapper home-courses__grid">
 			<?php
 			while ( $courses_query->have_posts() ) :
 				$courses_query->the_post();
@@ -30,7 +31,7 @@ if ( ! $courses_query->have_posts() ) {
 				$duration = oac_course_field( 'course_duration', $course_id );
 				$enroll_url = oac_course_field( 'course_enrollment_url', $course_id );
 				?>
-				<article class="home-course-card" data-animate-item>
+				<article class="home-course-card swiper-slide" data-animate-item>
 					<a class="home-course-card__image" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
 						<?php if ( $image ) : ?>
 							<img src="<?php echo esc_url( $image ); ?>" alt="" loading="lazy">
@@ -61,6 +62,16 @@ if ( ! $courses_query->have_posts() ) {
 					</div>
 				</article>
 			<?php endwhile; ?>
+				</div>
+			<div class="home-courses__controls" aria-label="<?php esc_attr_e( 'Course slides', 'oac-theme' ); ?>">
+				<button class="home-courses__arrow home-courses__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous courses', 'oac-theme' ); ?>" data-courses-prev>
+					<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+				</button>
+				<div class="home-courses__dots" data-courses-dots aria-label="<?php esc_attr_e( 'Choose course slide', 'oac-theme' ); ?>"></div>
+				<button class="home-courses__arrow home-courses__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next courses', 'oac-theme' ); ?>" data-courses-next>
+					<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+				</button>
+			</div>
 		</div>
 	</div>
 </section>

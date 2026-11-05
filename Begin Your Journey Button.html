@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Begin Your Journey Button</title>
+<style>
+  :root {
+    --bg: #ece8e2;
+    --navy: #1b2a5c;
+    --red: #e0472f;
+    --text: #1b2a5c;
+    --muted: #6b6f80;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1c22;
+      --text: #f1efe9;
+      --muted: #9a9cab;
+    }
+  }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .hint { font-size: 14px; color: var(--muted); }
+
+  .journey-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 8px 8px 32px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 999px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .journey-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--red);
+    /* starts as a circle exactly behind the arrow (center = 8px padding + 22px radius from right) */
+    clip-path: circle(22px at calc(100% - 30px) 50%);
+    transition: clip-path 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: clip-path;
+    z-index: -1;
+  }
+  .journey-btn:hover::before,
+  .journey-btn:focus-visible::before {
+    clip-path: circle(150% at calc(100% - 30px) 50%);
+  }
+
+  .journey-btn .icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-size: 22px;
+    transition: background 0.25s ease 0.05s;
+  }
+  .journey-btn:hover .icon,
+  .journey-btn:focus-visible .icon {
+    background: var(--navy);
+    transition-delay: 0.15s;   /* circle stays red until the fill has grown past it */
+  }
+</style>
+</head>
+<body>
+  <a href="#" class="journey-btn">
+    <span class="label">Begin Your Journey</span>
+    <span class="icon">→</span>
+  </a>
+  <div class="hint">Hover over the button</div>
+</body>
+</html>

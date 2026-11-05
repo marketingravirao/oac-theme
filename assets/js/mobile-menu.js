@@ -9,6 +9,88 @@
 
 	const mobileQuery = window.matchMedia('(max-width: 680px)');
 	const submenuParents = panel.querySelectorAll('.menu-item-has-children');
+	const submenuAnimations = new WeakMap();
+
+	const toggleSubmenu = (item) => {
+		if (!mobileQuery.matches) {
+			return;
+		}
+
+		const submenu = item.querySelector(':scope > .sub-menu');
+		const submenuToggle = item.querySelector(':scope > .submenu-toggle');
+		const submenuLink = item.querySelector(':scope > a');
+		if (!submenu || !submenuToggle) {
+			return;
+		}
+
+		const isExpanded = submenuToggle.getAttribute('aria-expanded') === 'true';
+		const shouldExpand = !isExpanded;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		const animateSubmenu = (submenuElement, open) => {
+			submenuAnimations.get(submenuElement)?.cancel();
+
+			const currentHeight = submenuElement.getBoundingClientRect().height;
+			const targetHeight = open ? submenuElement.scrollHeight : 0;
+			submenuElement.style.height = `${currentHeight}px`;
+			submenuElement.style.overflow = 'hidden';
+
+			if (reduceMotion) {
+				submenuElement.style.height = open ? `${targetHeight}px` : '0px';
+				return;
+			}
+
+			const animation = submenuElement.animate(
+				[
+					{ height: `${currentHeight}px`, opacity: open ? 0 : 1 },
+					{ height: `${targetHeight}px`, opacity: open ? 1 : 0 }
+				],
+				{ duration: 400, easing: 'cubic-bezier(.4, 0, .2, 1)' }
+			);
+			submenuAnimations.set(submenuElement, animation);
+			animation.finished.then(() => {
+				if (open) {
+					submenuElement.style.height = 'auto';
+				} else {
+					submenuElement.style.height = '0px';
+					submenuElement.setAttribute('inert', '');
+				}
+				submenuAnimations.delete(submenuElement);
+			}).catch(() => {});
+		};
+
+		if (shouldExpand) {
+			submenuParents.forEach((otherItem) => {
+				if (otherItem === item) {
+					return;
+				}
+
+				const otherSubmenu = otherItem.querySelector(':scope > .sub-menu');
+				const otherToggle = otherItem.querySelector(':scope > .submenu-toggle');
+				if (!otherSubmenu || !otherToggle) {
+					return;
+				}
+
+				otherItem.classList.remove('submenu-open', 'is-submenu-open');
+				otherToggle.setAttribute('aria-expanded', 'false');
+				otherItem.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+				animateSubmenu(otherSubmenu, false);
+			});
+		}
+
+		submenuToggle.setAttribute('aria-expanded', String(shouldExpand));
+		submenuLink?.setAttribute('aria-expanded', String(shouldExpand));
+		if (shouldExpand) {
+			submenu.removeAttribute('inert');
+			item.classList.add('submenu-open', 'is-submenu-open');
+			submenu.style.height = '0px';
+			submenu.offsetHeight;
+			animateSubmenu(submenu, true);
+		} else {
+			item.classList.remove('submenu-open', 'is-submenu-open');
+			animateSubmenu(submenu, false);
+		}
+	};
 
 	submenuParents.forEach((item, index) => {
 		const link = item.querySelector(':scope > a');
@@ -21,6 +103,10 @@
 			submenu.id = `primary-submenu-${index + 1}`;
 		}
 
+		link.setAttribute('aria-haspopup', 'true');
+		link.setAttribute('aria-expanded', 'false');
+		link.setAttribute('aria-controls', submenu.id);
+
 		const submenuToggle = document.createElement('button');
 		submenuToggle.className = 'submenu-toggle';
 		submenuToggle.type = 'button';
@@ -31,43 +117,14 @@
 		item.classList.add('has-submenu-toggle');
 		item.insertBefore(submenuToggle, submenu);
 		if (mobileQuery.matches) {
-			submenu.style.maxHeight = '0px';
+			submenu.style.height = '0px';
 			submenu.setAttribute('inert', '');
 		}
 
 		submenuToggle.addEventListener('click', () => {
-			const isExpanded = submenuToggle.getAttribute('aria-expanded') === 'true';
-			const shouldExpand = !isExpanded;
-			submenuToggle.setAttribute('aria-expanded', String(shouldExpand));
-			if (shouldExpand) {
-				submenu.removeAttribute('inert');
-				submenu.style.maxHeight = '0px';
-				item.classList.add('submenu-open');
-				submenu.offsetHeight;
-				requestAnimationFrame(() => {
-					submenu.style.maxHeight = `${submenu.scrollHeight}px`;
-				});
-			} else {
-				submenu.setAttribute('inert', '');
-				submenu.style.maxHeight = `${submenu.scrollHeight}px`;
-				submenu.offsetHeight;
-				item.classList.remove('submenu-open');
-				requestAnimationFrame(() => {
-					submenu.style.maxHeight = '0px';
-				});
-			}
+			toggleSubmenu(item);
 		});
 
-		submenu.addEventListener('transitionend', (event) => {
-			if (event.target !== submenu || event.propertyName !== 'max-height') {
-				return;
-			}
-			if (item.classList.contains('submenu-open')) {
-				submenu.style.maxHeight = 'none';
-			} else {
-				submenu.setAttribute('inert', '');
-			}
-		});
 	});
 
 	const resetSubmenus = () => {
@@ -75,15 +132,17 @@
 			const submenu = item.querySelector(':scope > .sub-menu');
 			const submenuToggle = item.querySelector(':scope > .submenu-toggle');
 			item.classList.remove('submenu-open', 'is-submenu-open');
+			submenuAnimations.get(submenu)?.cancel();
 			if (submenuToggle) {
 				submenuToggle.setAttribute('aria-expanded', 'false');
 			}
+			item.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
 			if (submenu) {
 				if (mobileQuery.matches) {
-					submenu.style.maxHeight = '0px';
+					submenu.style.height = '0px';
 					submenu.setAttribute('inert', '');
 				} else {
-					submenu.style.removeProperty('max-height');
+					submenu.style.removeProperty('height');
 					submenu.removeAttribute('inert');
 				}
 			}
@@ -125,9 +184,19 @@
 	backdrop.addEventListener('click', () => setOpen(false));
 
 	panel.addEventListener('click', (event) => {
-		if (event.target.closest('a')) {
-			setOpen(false);
+		const link = event.target.closest('a');
+		if (!link) {
+			return;
 		}
+
+		const parentItem = link.closest('.menu-item-has-children');
+		if (mobileQuery.matches && parentItem && link.parentElement === parentItem) {
+			event.preventDefault();
+			toggleSubmenu(parentItem);
+			return;
+		}
+
+		setOpen(false);
 	});
 
 	document.addEventListener('click', (event) => {
@@ -152,13 +221,13 @@
 				return;
 			}
 
-			item.classList.remove('submenu-open');
+			item.classList.remove('submenu-open', 'is-submenu-open');
 			submenuToggle.setAttribute('aria-expanded', 'false');
 			if (mobileQuery.matches) {
-				submenu.style.maxHeight = '0px';
+				submenu.style.height = '0px';
 				submenu.setAttribute('inert', '');
 			} else {
-				submenu.style.removeProperty('max-height');
+				submenu.style.removeProperty('height');
 				submenu.removeAttribute('inert');
 			}
 		});

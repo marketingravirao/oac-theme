@@ -18,8 +18,15 @@ function oac_theme_setup() {
 add_action( 'after_setup_theme', 'oac_theme_setup' );
 
 function oac_mark_login_menu_item( $classes, $item, $args ) {
-	if ( 'primary' === $args->theme_location && untrailingslashit( $item->url ) === untrailingslashit( home_url( '/login/' ) ) ) {
+	$is_login_item = in_array( 'header-login-btn', $classes, true )
+		|| stripos( $item->title, 'login' ) !== false
+		|| untrailingslashit( $item->url ) === untrailingslashit( home_url( '/login/' ) );
+
+	if ( 'primary' === $args->theme_location && $is_login_item ) {
 		$classes[] = 'nav-login-item';
+		if ( ! in_array( 'header-login-btn', $classes, true ) ) {
+			$classes[] = 'header-login-btn';
+		}
 	}
 
 	return $classes;

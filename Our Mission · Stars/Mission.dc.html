@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Our Mission</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{from{transform:scale(1.04)}to{transform:scale(1.15) translate(-10px,-8px)}}
+@keyframes twinkle{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes flow{to{stroke-dashoffset:-80}}
+@keyframes pulse{from{transform:scale(1);opacity:.7}to{transform:scale(3.4);opacity:0}}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(24deg)}3%{opacity:1}12%{opacity:0;transform:translate(460px,205px) rotate(24deg)}100%{opacity:0}}
+.pole{transform-origin:1180px 60px}
+.r1{animation:spin 500s linear infinite}.r2{animation:spin 380s linear infinite reverse}.r3{animation:spin 620s linear infinite}
+.drift{animation:drift 80s ease-in-out infinite alternate}
+.tw{animation:twinkle 6s ease-in-out infinite}
+.flow{stroke-dasharray:3 7;animation:flow 5s linear infinite}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 3.6s ease-out infinite}
+.shoot{animation:shoot 11s linear infinite}
+@media (prefers-reduced-motion:reduce){.r1,.r2,.r3,.drift,.tw,.flow,.pulse,.shoot{animation:none}}
+</style>
+</helmet>
+<div style="position:relative;overflow:hidden;min-height:760px;display:flex;align-items:center;font-family:'DM Sans',sans-serif;color:#F5EDE2;background:radial-gradient(ellipse 60% 70% at 85% 0%,#33447F,transparent 70%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(184,63,42,.2),transparent 70%),#1F2B58">
+<div class="tw" style="position:absolute;inset:0;background:radial-gradient(1.4px 1.4px at 6% 12%,#fff,transparent),radial-gradient(1px 1px at 17% 78%,#fff,transparent),radial-gradient(1.6px 1.6px at 31% 9%,#fff,transparent),radial-gradient(1px 1px at 44% 91%,#fff,transparent),radial-gradient(1.4px 1.4px at 58% 6%,#fff,transparent),radial-gradient(1px 1px at 66% 88%,#fff,transparent),radial-gradient(1.6px 1.6px at 79% 35%,#fff,transparent),radial-gradient(1px 1px at 92% 72%,#fff,transparent),radial-gradient(1.4px 1.4px at 97% 14%,#fff,transparent),radial-gradient(1px 1px at 3% 55%,#fff,transparent)"></div>
+<svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+<g fill="none" stroke="#F5EDE2" stroke-linecap="round">
+<g class="pole r1"><circle cx="1180" cy="60" r="140" stroke-width="2" stroke-dasharray="1 16" opacity=".5"></circle><circle cx="1180" cy="60" r="290" stroke-width="2" stroke-dasharray="1 20" opacity=".4"></circle><circle cx="1180" cy="60" r="480" stroke-width="2" stroke-dasharray="1 24" opacity=".32"></circle></g>
+<g class="pole r2"><circle cx="1180" cy="60" r="210" stroke-width="1.4" stroke-dasharray="190 3000" opacity=".5"></circle><circle cx="1180" cy="60" r="385" stroke-width="1.4" stroke-dasharray="260 3000" opacity=".4"></circle><circle cx="1180" cy="60" r="590" stroke-width="1.4" stroke-dasharray="320 4000" opacity=".3"></circle></g>
+<g class="pole r3"><circle cx="1180" cy="60" r="700" stroke-width="2" stroke-dasharray="1 28" opacity=".25"></circle><circle cx="1180" cy="60" r="820" stroke-width="1.2" stroke-dasharray="240 5000" opacity=".25"></circle></g>
+</g>
+<path d="M1180,46 l2,12 12,2 -12,2 -2,12 -2,-12 -12,-2 12,-2z" fill="#fff"></path>
+<text x="1198" y="38" font-size="9" letter-spacing="2.4" fill="#C9CFE6" style="font-family:'DM Sans',sans-serif">DHRUVA · THE POLE STAR</text>
+</svg>
+<div class="shoot" style="position:absolute;top:90px;left:8%;width:130px;height:1.5px;background:linear-gradient(90deg,transparent,#fff);opacity:0"></div>
+
+<div style="position:relative;max-width:1146px;width:100%;box-sizing:border-box;margin:0 auto;padding:96px 0;display:flex;align-items:center;gap:84px">
+<div style="position:relative;width:520px;height:460px;flex:none">
+<div style="position:absolute;left:-18px;top:18px;width:520px;height:460px;border:1px solid #E0614A;border-radius:200px 12px 12px 12px"></div>
+<div style="position:absolute;inset:0;border-radius:200px 12px 12px 12px;overflow:hidden;background:#141F47">
+<img class="drift" src="./assets/c7b6579647c8228950058aa32181f11b.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 50%">
+<div style="position:absolute;inset:0;background:#1F2D5C;mix-blend-mode:color;opacity:.62"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,31,71,.92),transparent 38%),radial-gradient(ellipse 60% 50% at 50% 47%,rgba(20,31,71,.35),transparent 80%)"></div>
+<svg viewBox="0 0 520 460" width="520" height="460" style="position:absolute;inset:0" role="img" aria-label="Constellation of students in six cities connected to the teacher's star">
+<polygon points="96,112 262,64 430,118 452,280 330,386 68,278" fill="none" stroke="#F5EDE2" stroke-width=".8" stroke-dasharray="2 5" opacity=".5"></polygon>
+<g class="flow" stroke="#F5EDE2" stroke-width="1.1" fill="none" opacity=".75"><path d="M260,215 L96,112"></path><path d="M260,215 L262,64"></path><path d="M260,215 L430,118"></path><path d="M260,215 L68,278"></path><path d="M260,215 L452,280"></path><path d="M260,215 L330,386"></path></g>
+<circle class="pulse" cx="260" cy="215" r="12" fill="none" stroke="#E0614A" stroke-width="1.4"></circle>
+<circle class="pulse" cx="260" cy="215" r="12" fill="none" stroke="#E0614A" stroke-width="1.4" style="animation-delay:1.8s"></circle>
+<circle cx="260" cy="215" r="18" fill="#E0614A" opacity=".25"></circle><circle cx="260" cy="215" r="7" fill="#fff"></circle>
+<g fill="#F5EDE2"><circle class="tw" cx="96" cy="112" r="4"></circle><circle class="tw" cx="262" cy="64" r="4" style="animation-delay:1s"></circle><circle class="tw" cx="430" cy="118" r="4" style="animation-delay:2s"></circle><circle class="tw" cx="68" cy="278" r="4" style="animation-delay:3s"></circle><circle class="tw" cx="452" cy="280" r="4" style="animation-delay:4s"></circle><circle class="tw" cx="330" cy="386" r="4" style="animation-delay:5s"></circle></g>
+<g font-size="9.5" letter-spacing="1.8" fill="#F5EDE2" style="font-family:'DM Sans',sans-serif;font-weight:500">
+<text x="108" y="108">MUMBAI · HINDI</text><text x="262" y="48" text-anchor="middle">LONDON · ENGLISH</text><text x="418" y="102" text-anchor="end">MOSCOW · RUSSIAN</text><text x="82" y="300">AHMEDABAD · GUJARATI</text><text x="440" y="304" text-anchor="end">MADRID · SPANISH</text><text x="342" y="390">PARIS · FRENCH</text>
+<text x="260" y="248" text-anchor="middle" fill="#fff">DR. RAVI RAO</text>
+</g>
+</svg>
+<div style="position:absolute;right:24px;top:24px;display:flex;align-items:center;gap:8px;background:rgba(20,31,71,.7);border:1px solid rgba(245,237,226,.4);border-radius:99px;padding:7px 14px;font-size:10px;letter-spacing:.16em"><span class="tw" style="width:8px;height:8px;border-radius:50%;background:#E0614A"></span>LIVE CLASS IN SESSION</div>
+<div style="position:absolute;left:34px;bottom:30px;width:240px"><div style="font:italic 400 26px/1.05 'Instrument Serif',serif">A class, as the sky sees it</div><div style="margin-top:8px;font-size:10px;letter-spacing:.18em;color:#C9CFE6">FIG. 3 · ONE SKY, MANY LANGUAGES</div></div>
+</div>
+</div>
+
+<div style="flex:1;min-width:0">
+<div style="display:flex;align-items:center;gap:14px;font-size:13px;font-weight:700;letter-spacing:.18em;color:#C9CFE6"><span style="width:36px;height:1px;background:#E0614A"></span>OUR MISSION</div>
+<h2 style="margin:22px 0 0;font:400 62px/1.02 'Instrument Serif',serif;letter-spacing:-.01em">The stars have always spoken. Our mission is to teach the world to <em style="color:#E0614A">listen.</em></h2>
+<p style="margin:28px 0 0;font-size:18px;line-height:1.65;color:#DDE1F0">Authentic, scientific and practical teachings that blend ancient wisdom with modern insights. Drawing on Dr. Ravi Rao’s more than thirty years of teaching and practice, we teach astrology not only to be understood, but to be lived.</p>
+<div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;font-size:15px"><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">English</span><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">Hindi</span><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">Gujarati</span><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">Russian</span><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">Spanish</span><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">French</span><span style="border:1px solid rgba(245,237,226,.5);border-radius:99px;padding:10px 18px">+ more</span></div>
+<a href="#" style="display:inline-block;margin-top:34px;font-weight:700;font-size:17px;border-bottom:2px solid #E0614A;padding-bottom:5px">Learn more about us →</a>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":760}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

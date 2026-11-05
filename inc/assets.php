@@ -29,6 +29,7 @@ function oac_enqueue_assets() {
 	if ( $is_home ) {
 		$home_css = '/assets/css/pages/home.css';
 		wp_enqueue_style( 'oac-home', get_theme_file_uri( $home_css ), array( 'oac-theme' ), oac_asset_version( $home_css ) );
+		wp_enqueue_style( 'oac-swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.1.15' );
 	}
 	if ( $is_about ) {
 		$about_css = '/assets/css/pages/about.css';
@@ -87,19 +88,21 @@ function oac_enqueue_assets() {
 	$scroll_trigger = '/assets/vendor/gsap/ScrollTrigger.min.js';
 	$split_text = '/assets/vendor/gsap/SplitText.min.js';
 	$animations = '/assets/js/animations.js';
-	$home_hero = '/assets/js/home-hero-slider.js';
+	$home_courses = '/assets/js/home-courses-slider.js';
 
 	wp_enqueue_script( 'oac-gsap', get_theme_file_uri( $gsap_core ), array(), oac_asset_version( $gsap_core ), true );
 	wp_enqueue_script( 'oac-scroll-trigger', get_theme_file_uri( $scroll_trigger ), array( 'oac-gsap' ), oac_asset_version( $scroll_trigger ), true );
 	wp_enqueue_script( 'oac-split-text', get_theme_file_uri( $split_text ), array( 'oac-gsap' ), oac_asset_version( $split_text ), true );
 	wp_enqueue_script( 'oac-animations', get_theme_file_uri( $animations ), array( 'oac-gsap', 'oac-scroll-trigger', 'oac-split-text' ), oac_asset_version( $animations ), true );
 	if ( $is_home ) {
-		wp_enqueue_script( 'oac-home-hero', get_theme_file_uri( $home_hero ), array( 'oac-gsap' ), oac_asset_version( $home_hero ), true );
+		wp_enqueue_script( 'oac-swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.1.15', true );
+		wp_enqueue_script( 'oac-home-courses', get_theme_file_uri( $home_courses ), array( 'oac-swiper' ), oac_asset_version( $home_courses ), true );
 	}
 
 	$script_handles = array( 'oac-gsap', 'oac-scroll-trigger', 'oac-split-text', 'oac-animations' );
 	if ( $is_home ) {
-		$script_handles[] = 'oac-home-hero';
+		$script_handles[] = 'oac-home-courses';
+		$script_handles[] = 'oac-swiper';
 	}
 	foreach ( $script_handles as $handle ) {
 		wp_script_add_data( $handle, 'strategy', 'defer' );
