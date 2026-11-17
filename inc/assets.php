@@ -24,8 +24,10 @@ function oac_enqueue_assets() {
 	$is_about = is_page_template( 'templates/template-about.php' );
 	$is_contact = is_page_template( 'templates/template-contact.php' );
 	$is_affiliates = is_page_template( 'templates/template-affiliates.php' );
+	$is_thank_you = is_page_template( 'templates/template-thank-you.php' );
 	$is_courses = is_post_type_archive( 'course' ) || is_singular( 'course' );
 	$is_blogs = is_home() || is_category() || is_tag() || is_post_type_archive( 'post' ) || is_singular( 'post' );
+	$is_news = is_post_type_archive( 'news' ) || is_singular( 'news' );
 	if ( $is_home ) {
 		$home_css = '/assets/css/pages/home.css';
 		wp_enqueue_style( 'oac-home', get_theme_file_uri( $home_css ), array( 'oac-theme' ), oac_asset_version( $home_css ) );
@@ -47,6 +49,10 @@ function oac_enqueue_assets() {
 		wp_enqueue_script( 'oac-affiliate-form', 'https://app.onlineastrologyclasses.com/js/form_embed.js', array(), null, true );
 		wp_script_add_data( 'oac-affiliate-form', 'strategy', 'defer' );
 	}
+	if ( $is_thank_you ) {
+		$thank_you_css = '/assets/css/pages/thank-you.css';
+		wp_enqueue_style( 'oac-thank-you', get_theme_file_uri( $thank_you_css ), array( 'oac-theme' ), oac_asset_version( $thank_you_css ) );
+	}
 	if ( $is_courses ) {
 		$courses_css = '/assets/css/pages/courses.css';
 		wp_enqueue_style( 'oac-courses', get_theme_file_uri( $courses_css ), array( 'oac-theme' ), oac_asset_version( $courses_css ) );
@@ -56,7 +62,7 @@ function oac_enqueue_assets() {
 			wp_script_add_data( 'oac-course-curriculum', 'strategy', 'defer' );
 		}
 	}
-	if ( $is_blogs ) {
+	if ( $is_blogs || $is_news ) {
 		$blogs_css = '/assets/css/pages/blogs.css';
 		wp_enqueue_style( 'oac-blogs', get_theme_file_uri( $blogs_css ), array( 'oac-theme' ), oac_asset_version( $blogs_css ) );
 	}
@@ -80,7 +86,7 @@ function oac_enqueue_assets() {
 		wp_enqueue_script( 'oac-faq-accordion', get_theme_file_uri( $faq_script ), array(), oac_asset_version( $faq_script ), true );
 		wp_script_add_data( 'oac-faq-accordion', 'strategy', 'defer' );
 	}
-	if ( ! $is_home && ! $is_about && ! $is_contact && ! $is_affiliates && ! $is_courses && ! $is_blogs ) {
+	if ( ! $is_home && ! $is_about && ! $is_contact && ! $is_affiliates && ! $is_thank_you && ! $is_courses && ! $is_blogs && ! $is_news ) {
 		return;
 	}
 

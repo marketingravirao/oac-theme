@@ -9,8 +9,21 @@
 			<?php
 			wp_nav_menu(
 				array(
-					'theme_location' => 'footer',
-					'menu'           => 'Footer Menu',
+					'theme_location' => 'footer_explore',
+					'container'      => false,
+					'menu_class'     => 'footer__menu',
+					'fallback_cb'    => false,
+					'depth'          => 1,
+				)
+			);
+			?>
+		</nav>
+		<nav class="footer__legal" aria-label="<?php esc_attr_e( 'Legal', 'oac-theme' ); ?>">
+			<h2><?php esc_html_e( 'Legal', 'oac-theme' ); ?></h2>
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'footer_legal',
 					'container'      => false,
 					'menu_class'     => 'footer__menu',
 					'fallback_cb'    => false,

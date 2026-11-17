@@ -28,9 +28,11 @@
 		</div>
 		<div class="contact-bar__social" role="group" aria-label="<?php esc_attr_e( 'Follow us on social media', 'oac-theme' ); ?>">
 			<span class="contact-bar__social-label"><?php esc_html_e( 'Follow us:', 'oac-theme' ); ?></span>
-			<a href="https://www.facebook.com/Onlineastrologyclassesoac/" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-			<a href="https://www.instagram.com/online_astrology_classes/" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-			<a href="https://wa.link/ilyiox" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+			<a href="https://www.facebook.com/Onlineastrologyclassesoac/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+			<a href="https://www.instagram.com/online_astrology_classes/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+			<a href="https://wa.link/ilyiox" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+			<a href="https://in.linkedin.com/in/dr-ravi-rao-a883021a8" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+			<a href="https://youtube.com/@drraoofficialvaastuinsights" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
 		</div>
 	</div>
 </div>
@@ -64,9 +66,11 @@
 						</div>
 						<div class="contact-bar__social" role="group" aria-label="<?php esc_attr_e( 'Follow us on social media', 'oac-theme' ); ?>">
 							<span class="contact-bar__social-label"><?php esc_html_e( 'Follow us:', 'oac-theme' ); ?></span>
-							<a href="https://www.facebook.com/Onlineastrologyclassesoac/" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-							<a href="https://www.instagram.com/online_astrology_classes/" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-							<a href="https://wa.link/ilyiox" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+							<a href="https://www.facebook.com/Onlineastrologyclassesoac/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+							<a href="https://www.instagram.com/online_astrology_classes/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+							<a href="https://wa.link/ilyiox" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+							<a href="https://in.linkedin.com/in/dr-ravi-rao-a883021a8" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+							<a href="https://youtube.com/@drraoofficialvaastuinsights" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
 						</div>
 					</div>
 				</div>

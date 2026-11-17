@@ -72,7 +72,12 @@
 							<i class="fa-solid fa-arrow-right"></i>
 						</span>
 					</a>
-					<?php get_template_part( 'template-parts/components/button', null, array( 'text' => __( 'Discover our mission', 'oac-theme' ), 'url' => '#mission', 'variant' => 'outline' ) ); ?>
+					<a class="hero__mission-btn" href="#mission">
+						<span class="hero__mission-btn__label"><?php esc_html_e( 'Discover our mission', 'oac-theme' ); ?></span>
+						<span class="hero__mission-btn__icon" aria-hidden="true">
+							<i class="fa-solid fa-arrow-right"></i>
+						</span>
+					</a>
 				</div>
 				<div class="hero__proof" aria-label="<?php esc_attr_e( 'Course highlights', 'oac-theme' ); ?>">
 					<span><?php esc_html_e( '30+ Years of Teaching', 'oac-theme' ); ?></span>

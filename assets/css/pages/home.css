@@ -354,7 +354,84 @@
 .journey-btn:hover .journey-btn__icon,
 .journey-btn:focus-visible .journey-btn__icon {
 	background: var(--color-primary-deep);
+	transform: rotate(-8deg);
 	transition-delay: 150ms;
+}
+
+.journey-btn:hover .journey-btn__icon i,
+.journey-btn:focus-visible .journey-btn__icon i {
+	transform: translateX(0.2rem);
+}
+
+.hero__mission-btn {
+	position: relative;
+	display: inline-flex;
+	min-height: 3.75rem;
+	align-items: center;
+	gap: 1.25rem;
+	padding: 0.5rem 0.625rem 0.5rem 1.5rem;
+	border: 0.0625rem solid var(--color-primary-deep);
+	border-radius: 62.4375rem;
+	color: var(--color-primary-deep);
+	background: transparent;
+	font-size: 1.125rem;
+	font-weight: 500;
+	line-height: 1;
+	text-decoration: none;
+	overflow: hidden;
+	isolation: isolate;
+	transition: color 300ms ease, border-color 300ms ease;
+}
+
+.hero__mission-btn::before {
+	position: absolute;
+	z-index: -1;
+	inset: 0;
+	border-radius: inherit;
+	background: var(--color-primary-deep);
+	content: "";
+	transform: translateX(-101%);
+	transition: transform 400ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.hero__mission-btn__icon {
+	display: grid;
+	width: 2.75rem;
+	height: 2.75rem;
+	flex: 0 0 2.75rem;
+	place-items: center;
+	border-radius: 50%;
+	color: #fff;
+	background: var(--color-accent-deep);
+	font-size: 1rem;
+	transition: color 300ms ease, background 300ms ease, transform 300ms ease;
+}
+
+.hero__mission-btn__icon i {
+	transition: transform 300ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.hero__mission-btn:hover,
+.hero__mission-btn:focus-visible {
+	color: #fff;
+	border-color: var(--color-primary-deep);
+}
+
+.hero__mission-btn:hover::before,
+.hero__mission-btn:focus-visible::before {
+	transform: translateX(0);
+}
+
+.hero__mission-btn:hover .hero__mission-btn__icon,
+.hero__mission-btn:focus-visible .hero__mission-btn__icon {
+	color: var(--color-primary-deep);
+	background: #fff;
+	transform: rotate(-8deg);
+}
+
+.hero__mission-btn:hover .hero__mission-btn__icon i,
+.hero__mission-btn:focus-visible .hero__mission-btn__icon i {
+	transform: translateX(0.2rem);
 }
 
 
@@ -362,7 +439,10 @@
 
 	.journey-btn::before,
 	.journey-btn__icon,
-	.journey-btn__icon i {
+	.journey-btn__icon i,
+	.hero__mission-btn::before,
+	.hero__mission-btn__icon,
+	.hero__mission-btn__icon i {
 		transition: none;
 	}
 }
@@ -1631,6 +1711,21 @@
 		gap: 0.75rem;
 		padding-left: 1.25rem;
 		font-size: 0.9375rem;
+	}
+
+	.hero__mission-btn {
+		width: 100%;
+		min-height: 3rem;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.125rem 0.125rem 0.125rem 1.25rem;
+		font-size: 0.9375rem;
+	}
+
+	.hero__mission-btn__icon {
+		width: 2.5rem;
+		height: 2.5rem;
+		flex-basis: 2.5rem;
 	}
 
 	.hero__proof {

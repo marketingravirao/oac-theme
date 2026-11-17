@@ -9,3 +9,4 @@ require_once get_theme_file_path( '/inc/assets.php' );
 require_once get_theme_file_path( '/inc/components.php' );
 require_once get_theme_file_path( '/inc/courses.php' );
 require_once get_theme_file_path( '/plugins/oac-course-importer/oac-course-importer.php' );
+require_once get_theme_file_path( '/plugins/oac-news-importer/oac-news-importer.php' );
